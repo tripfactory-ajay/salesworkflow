@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Workflows: B2C vs B2B vs Unified</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #ffffff; 
+            padding: 20px;
+            text-align: center;
+        }
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            text-align: center;
+        }
+
+        /* LOGOS - Centered, no borders, ORN larger in middle */
+        .logo-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-header table {
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 40px;
+        }
+        .logo-header td {
+            vertical-align: middle;
+        }
+        .logo-side {
+            width: 160px;
+            height: 70px;
+        }
+        .logo-center {
+            width: 200px;
+            height: 90px;
+        }
+        .logo-header img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* TITLE */
+        h1 {
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        /* BUTTONS - Centered */
+        .button-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .button-container table {
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+        .tab {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .tab.b2c { background: #FF6B35; color: white; }
+        .tab.b2b { background: #004E89; color: white; }
+        .tab.unified { background: #7B2CBF; color: white; }
+        .tab.analysis { background: #2ECC71; color: white; }
+        .tab:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .tab.active { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+
+        /* WORKFLOW CONTAINERS */
+        .workflow-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: none;
+            border: 1px solid #e9ecef;
+            text-align: left;
+        }
+        .workflow-container.active { display: block; }
+
+        .workflow-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .workflow-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        /* STEPS */
+        .step-wrapper { margin-bottom: 15px; }
+        .step {
+            display: flex;
+            align-items: stretch;
+            transition: all 0.3s ease;
+        }
+        .step:hover { transform: translateX(10px); }
+        .step-number {
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: white;
+            border-radius: 10px 0 0 10px;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            background: #fafafa;
+            position: relative;
+        }
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .step-name { font-size: 1.3em; font-weight: 700; }
+        .step-badges { display: flex; gap: 8px; align-items: center; }
+        .step-owner {
+            background: rgba(0,0,0,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .duplication-badge {
+            background: linear-gradient(135deg, #FFD93D, #F6AD55);
+            color: #744210;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            border: 2px solid #F6AD55;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .step-details { color: #555; line-height: 1.5; }
+        .connector { width: 2px; height: 20px; margin-left: 25px; }
+
+        /* B2C Colors */
+        .b2c-theme .step-number { background: #FF6B35; }
+        .b2c-theme .step-content { border-color: #FF6B35; }
+        .b2c-theme .step-name { color: #FF6B35; }
+        .b2c-theme .connector { background: #FF6B35; }
+
+        /* B2B Colors */
+        .b2b-theme .step-number { background: #004E89; }
+        .b2b-theme .step-content { border-color: #004E89; }
+        .b2b-theme .step-name { color: #004E89; }
+        .b2b-theme .connector { background: #004E89; }
+
+        /* Unified */
+        .unified-theme .section { margin-bottom: 30px; }
+        .unified-theme .section-header {
+            background: linear-gradient(135deg, #7B2CBF, #9D4EDD);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .streams {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stream {
+            border-radius: 15px;
+            padding: 20px;
+            border: 3px solid;
+        }
+        .stream.b2c-stream { border-color: #FF6B35; background: rgba(255,107,53,0.05); }
+        .stream.b2b-stream { border-color: #004E89; background: rgba(0,78,137,0.05); }
+        .stream-title { font-weight: 700; font-size: 1.2em; margin-bottom: 15px; text-align: center; }
+        .stream.b2c-stream .stream-title { color: #FF6B35; }
+        .stream.b2b-stream .stream-title { color: #004E89; }
+        .stream-steps { display: flex; flex-direction: column; gap: 10px; }
+        .stream-step {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            font-size: 0.95em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .b2c-stream .stream-step { border-left-color: #FF6B35; }
+        .b2b-stream .stream-step { border-left-color: #004E89; }
+        .central-hub {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 3px solid #7B2CBF;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        .central-title { text-align: center; color: #7B2CBF; font-weight: 700; font-size: 1.3em; margin-bottom: 20px; }
+        .central-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .central-step {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #7B2CBF;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .central-step:hover { background: #7B2CBF; color: white; transform: scale(1.05); }
+        .backend-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        .backend-title { text-align: center; font-weight: 700; font-size: 1.3em; margin-bottom: 20px; color: #ecf0f1; }
+        .backend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .backend-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Analysis */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .analysis-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .analysis-card.overlap { border-left-color: #2ECC71; }
+        .analysis-card.divergence { border-left-color: #E74C3C; }
+        .analysis-card.opportunity { border-left-color: #F39C12; }
+        .analysis-card h3 { margin-bottom: 15px; font-size: 1.3em; color: #2c3e50; }
+        .analysis-card ul { list-style: none; padding: 0; }
+        .analysis-card li { padding: 8px 0; border-bottom: 1px solid #eee; position: relative; padding-left: 20px; }
+        .analysis-card li:before { content: "→"; position: absolute; left: 0; color: #7B2CBF; font-weight: bold; }
+
+        .metric-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+        .metric-title { font-weight: 700; color: #7B2CBF; margin-bottom: 15px; font-size: 1.1em; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #7B2CBF; color: white; font-weight: 600; }
+        tr:hover { background: #f5f5f5; }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        .legend-badge {
+            background: linear-gradient(135deg, #FFD93D, #F6AD55);
+            color: #744210;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            border: 2px solid #F6AD55;
+        }
+
+        @media (max-width: 768px) {
+            .streams { grid-template-columns: 1fr; }
+            .central-steps { grid-template-columns: 1fr; }
+            .step-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .logo-header table { border-spacing: 20px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+
+        <!-- LOGOS CENTERED -->
+        <div class="logo-header">
+            <table>
+                <tr>
+                    <td class="logo-side">
+                        <img src="tripfactory-logo.png" alt="TripFactory" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=color:#999;font-size:12px;>tripfactory-logo.png</span>';">
+                    </td>
+                    <td class="logo-center">
+                        <img src="orn-logo.png" alt="ORN" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=color:#999;font-size:12px;>orn-logo.png</span>';">
+                    </td>
+                    <td class="logo-side">
+                        <img src="nexus-logo.png" alt="Nexus DMC" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=color:#999;font-size:12px;>nexus-logo.png</span>';">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- TITLE CENTERED -->
+        <h1>Sales Workflow Architecture</h1>
+        <p class="subtitle">B2C Direct Sales vs B2B Agent-Enabled Sales → Unified Centralised Model</p>
+
+        <!-- BUTTONS CENTERED -->
+        <div class="button-container">
+            <table>
+                <tr>
+                    <td><button class="tab b2c active" onclick="showWorkflow('b2c')">B2C Workflow</button></td>
+                    <td><button class="tab b2b" onclick="showWorkflow('b2b')">B2B Workflow</button></td>
+                    <td><button class="tab unified" onclick="showWorkflow('unified')">Unified Workflow</button></td>
+                    <td><button class="tab analysis" onclick="showWorkflow('analysis')">Overlap Analysis</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- B2C WORKFLOW -->
+        <div id="b2c" class="workflow-container b2c-theme active">
+            <div class="workflow-title" style="color: #FF6B35;">
+                <span>👤</span> B2C Sales Workflow - TripFactory
+            </div>
+            <p class="workflow-subtitle">Direct-to-Consumer: Lead → Expert → Closure (12 Steps)</p>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Lead Generation</span>
+                            <span class="step-owner">Marketing</span>
+                        </div>
+                        <div class="step-details">Multi-channel capture: SEM, Direct traffic, Referrals. All leads fed into central CRM with source attribution.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">FCD Qualification</span>
+                            <span class="step-owner">First Call Desk</span>
+                        </div>
+                        <div class="step-details">First Call Desk validates lead intent, checks budget range, confirms travel timeline.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Lead Allocation</span>
+                            <span class="step-owner">Team Leader</span>
+                        </div>
+                        <div class="step-details">Smart assignment based on destination expertise, city/language match. Load balanced: 3-5 leads per expert per day.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Expert Consultation</span>
+                            <span class="step-owner">Travel Expert</span>
+                        </div>
+                        <div class="step-details">CRM-based calling with recording. Consultative advisory approach. Target: 3.5-5 min talk time.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Itinerary Creation</span>
+                            <span class="step-owner">Travel Expert</span>
+                        </div>
+                        <div class="step-details">Mandatory 3+ options: Budget, Standard, Premium. Multi-destination complexity handled.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Quote Dispatch</span>
+                            <span class="step-owner">Travel Expert</span>
+                        </div>
+                        <div class="step-details">Professional quote communication via email/CRM. Clear inclusions/exclusions.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Follow-up & Revisions</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Travel Expert</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Structured 3-5 day cycle. Objection handling, itinerary tweaks. Value reinforcement.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content" style="background: rgba(46, 204, 113, 0.1); border-color: #2ECC71;">
+                        <div class="step-header">
+                            <span class="step-name" style="color: #2ECC71;">🎯 Closure & Confirmation</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Travel Expert</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Booking confirmation secured, initial payment received. Handover to ops triggered.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">9</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Ops Handover</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Operations</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Flight confirmations, hotel vouchers, attraction bookings. Quality and TAT tracked.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">10</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Payments & Vouchers</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Payments Team</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Balance payment follow-up. Final voucher pack released as per timelines.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">11</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Travel Briefing</span>
+                            <span class="step-owner">Travel Expert</span>
+                        </div>
+                        <div class="step-details">Pre-trip briefing, Holiday app setup, emergency contacts shared.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">12</div>
+                    <div class="step-content" style="background: rgba(155, 89, 182, 0.1); border-color: #9B59B6;">
+                        <div class="step-header">
+                            <span class="step-name" style="color: #9B59B6;">✅ Delivery & Review</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Delivery Team</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">On-ground support throughout trip. Post-trip feedback call. Google review request + referral/repeat travel ask.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-title">📊 B2C Key Metrics</div>
+                <table>
+                    <tr><th>Metric</th><th>Target</th><th>Measurement</th></tr>
+                    <tr><td>Lead → Conversion (Direct)</td><td>20%</td><td>Expert Dashboard</td></tr>
+                    <tr><td>First Call Talk Time</td><td>3.5-5 mins</td><td>Call Audit</td></tr>
+                    <tr><td>Quotes Shared</td><td>3+ options</td><td>Mandatory</td></tr>
+                    <tr><td>Lead → MTC</td><td>35%</td><td>Expert Dashboard</td></tr>
+                    <tr><td>MTC → Closure</td><td>50%</td><td>Lead States</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- B2B WORKFLOW -->
+        <div id="b2b" class="workflow-container b2b-theme">
+            <div class="workflow-title" style="color: #004E89;">
+                <span>🏢</span> B2B Sales Workflow - Nexus DMC
+            </div>
+            <p class="workflow-subtitle">Agent-Enabled Sales: Registration → Training → Agent Self-Service (13 Steps)</p>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Agent Registration</span>
+                            <span class="step-owner">Agent</span>
+                        </div>
+                        <div class="step-details">Self-service registration on Nexus platform. Profile created, all activity captured in CRM.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Verification & Onboarding</span>
+                            <span class="step-owner">Onboarding Team</span>
+                        </div>
+                        <div class="step-details">Profile validation call, document collection, approval workflow. Training invites sent post-approval.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Training (2 Tracks)</span>
+                            <span class="step-owner">Training Team</span>
+                        </div>
+                        <div class="step-details">Platform training (mandatory) + Daily destination training calendar. Marketing tools + flyer generator.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Field Sales Activation</span>
+                            <span class="step-owner">State Head / AM</span>
+                        </div>
+                        <div class="step-details">Physical agent visits, business profiling, platform adoption support, marketing tool setup.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">SPOC Mapping</span>
+                            <span class="step-owner">KAM / Field Sales</span>
+                        </div>
+                        <div class="step-details">KAM assigned where available; else Field Sales becomes SPOC. Single point for engagement, retention, escalations.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Quote Creation by Agent</span>
+                            <span class="step-owner">Agent</span>
+                        </div>
+                        <div class="step-details">Agent creates quotes in Nexus platform. WhatsApp/Email enquiries converted to CRM entries.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Auto-Assignment</span>
+                            <span class="step-owner">System</span>
+                        </div>
+                        <div class="step-details">System auto-routes quotes to destination support experts based on destination mapping. 24h SLA for manual assignment.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Destination Support</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Destination Expert</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Requirements confirmation, product planning, negotiation support, ORN creation guidance. New agent hand-holding.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">9</div>
+                    <div class="step-content" style="background: rgba(46, 204, 113, 0.1); border-color: #2ECC71;">
+                        <div class="step-header">
+                            <span class="step-name" style="color: #2ECC71;">🎯 Closure Enablement</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Agent + Support</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Agent drives customer closure with expert/KAM support. FIT, Fixed Departures, Group tours supported.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">10</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Ops Handover</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Operations</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Confirmations with quality/TAT tracking. 24h escalation SLA via dashboard ticket system.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">11</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Payments</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Payments Team</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Deposit + balance follow-up (complete payment 7-21 days before travel). Voucher pack 48h before departure.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">12</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <span class="step-name">Delivery & Holiday App</span>
+                            <span class="step-badges">
+                                <span class="step-owner">Delivery Team</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">On-ground support during travel. Holiday app for itinerary/service info.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="connector"></div>
+
+            <div class="step-wrapper">
+                <div class="step">
+                    <div class="step-number">13</div>
+                    <div class="step-content" style="background: rgba(155, 89, 182, 0.1); border-color: #9B59B6;">
+                        <div class="step-header">
+                            <span class="step-name" style="color: #9B59B6;">✅ Post-Trip Review</span>
+                            <span class="step-badges">
+                                <span class="step-owner">CX / SPOC</span>
+                                <span class="duplication-badge">🔄 DUPLICATE</span>
+                            </span>
+                        </div>
+                        <div class="step-details">Agent review captured. Repeat/referral loop. PCP (Partner Growth Programmes) for loyalty. Corrective action for negative feedback.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-title">📊 B2B Key Metrics</div>
+                <table>
+                    <tr><th>Metric</th><th>Target</th><th>Measurement</th></tr>
+                    <tr><td>Platform Training Completion</td><td>90%+</td><td>Training Tracker</td></tr>
+                    <tr><td>Profile Completion</td><td>95%+</td><td>Agent Profile</td></tr>
+                    <tr><td>Agent Retention</td><td>80%</td><td>FS Dashboard</td></tr>
+                    <tr><td>Ops Escalation TAT</td><td>24 hours</td><td>SLA Desk</td></tr>
+                    <tr><td>Quote → Booking</td><td>Market-based</td><td>Destination Dashboard</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- UNIFIED WORKFLOW -->
+        <div id="unified" class="workflow-container unified-theme">
+            <div class="workflow-title" style="color: #7B2CBF;">
+                <span>🔄</span> Unified Sales Workflow - Centralised Operations Model
+            </div>
+            <p class="workflow-subtitle">Hub & Spoke Architecture: Common backend, specialised frontends</p>
+
+            <div class="section">
+                <div class="section-header">Front End: Specialised Acquisition Streams</div>
+                <div class="streams">
+                    <div class="stream b2c-stream">
+                        <div class="stream-title">👤 B2C Direct Stream</div>
+                        <div class="stream-steps">
+                            <div class="stream-step">Lead Generation (SEM/Direct)</div>
+                            <div class="stream-step">FCD Qualification Layer</div>
+                            <div class="stream-step">Expert Allocation (Dest/City/Lang)</div>
+                            <div class="stream-step">Direct Consultative Selling</div>
+                            <div class="stream-step" style="background: #e8f5e9; border-left-color: #4caf50;"><strong>→ Handoff to Central Hub</strong></div>
+                        </div>
+                    </div>
+                    <div class="stream b2b-stream">
+                        <div class="stream-title">🏢 B2B Agent Stream</div>
+                        <div class="stream-steps">
+                            <div class="stream-step">Self-Registration (Nexus)</div>
+                            <div class="stream-step">Verification & Onboarding</div>
+                            <div class="stream-step">Two-Track Training System</div>
+                            <div class="stream-step">SPOC Assignment (KAM/Field)</div>
+                            <div class="stream-step">Agent Self-Quote Creation</div>
+                            <div class="stream-step" style="background: #e8f5e9; border-left-color: #4caf50;"><strong>→ Handoff to Central Hub</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="central-hub">
+                <div class="central-title">⚙️ CENTRAL HUB: Shared Operations Core</div>
+                <div style="background: #fff3cd; border: 2px solid #FFD93D; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: center;">
+                    <strong>🔄 All steps below are duplicated in BOTH B2B and B2C workflows</strong><br>
+                    <span style="font-size: 0.9em; color: #744210;">Centralising these eliminates duplication and maximises resource utilisation</span>
+                </div>
+                <div class="central-steps">
+                    <div class="central-step">Quote Management System</div>
+                    <div class="central-step">Destination Expert Support</div>
+                    <div class="central-step">Follow-up & Revision Cycle</div>
+                    <div class="central-step">Closure Enablement</div>
+                    <div class="central-step">Ops Handover & Confirmations</div>
+                    <div class="central-step">Payments & Voucher Management</div>
+                    <div class="central-step">Delivery Support</div>
+                    <div class="central-step">Holiday App</div>
+                </div>
+            </div>
+
+            <div class="backend-section">
+                <div class="backend-title">📈 BACK END: Common Feedback & Growth Engine</div>
+                <div style="text-align: center; margin-bottom: 15px; color: #bdc3c7; font-size: 0.9em;">All components serve both B2C and B2B</div>
+                <div class="backend-grid">
+                    <div class="backend-item">Post-Trip Review Capture</div>
+                    <div class="backend-item">Feedback Loop & Corrective Action</div>
+                    <div class="backend-item">Repeat/Referral Programmes</div>
+                    <div class="backend-item">Performance Analytics</div>
+                    <div class="backend-item">Quality Assurance</div>
+                    <div class="backend-item">Training Calibration</div>
+                </div>
+            </div>
+
+            <div class="metric-box" style="margin-top: 30px;">
+                <div class="metric-title">💡 Unified Model Benefits</div>
+                <table>
+                    <tr><th>Aspect</th><th>Before (Siloed)</th><th>After (Unified)</th></tr>
+                    <tr><td>Operations Team</td><td>Separate B2C + B2B ops</td><td>Single Destination Expert pool</td></tr>
+                    <tr><td>Training</td><td>Different programmes</td><td>Modular: Common core + specialised tracks</td></tr>
+                    <tr><td>Technology</td><td>CRM + Nexus separate</td><td>Single platform, different interfaces</td></tr>
+                    <tr><td>Payments</td><td>Separate processes</td><td>Unified payment ops</td></tr>
+                    <tr><td>Delivery</td><td>Different teams</td><td>Shared on-ground support</td></tr>
+                    <tr><td>Reviews</td><td>Siloed feedback</td><td>Centralised CX analytics</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ANALYSIS -->
+        <div id="analysis" class="workflow-container">
+            <div class="workflow-title" style="color: #2c3e50;">
+                <span>🔍</span> Workflow Overlap Analysis & Recommendations
+            </div>
+            <p class="workflow-subtitle">Strategic analysis of commonalities, divergences, and optimisation opportunities</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card overlap">
+                    <h3>🟢 Major Overlaps (Centralise These)</h3>
+                    <ul>
+                        <li><strong>Destination Expert Support:</strong> Both need destination specialists for complex itineraries</li>
+                        <li><strong>Quote Creation Logic:</strong> 3-option model, multi-destination handling, pricing rules</li>
+                        <li><strong>Operations Handover:</strong> Flight/hotel confirmations, voucher generation</li>
+                        <li><strong>Payments Processing:</strong> Deposit handling, balance follow-up, TAT tracking</li>
+                        <li><strong>Delivery Support:</strong> On-ground assistance, Holiday app, emergency handling</li>
+                        <li><strong>Post-Trip Reviews:</strong> Feedback collection, Google reviews, corrective actions</li>
+                        <li><strong>SLA Management:</strong> 24h escalation rules, quality tracking</li>
+                        <li><strong>Training Content:</strong> Destination knowledge, product updates, visa rules</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card divergence">
+                    <h3>🔴 Key Divergences (Keep Separate)</h3>
+                    <ul>
+                        <li><strong>Acquisition Model:</strong> Direct leads vs Agent self-registration</li>
+                        <li><strong>Qualification:</strong> FCD (B2C) vs Verification Team (B2B)</li>
+                        <li><strong>Sales Approach:</strong> Direct selling vs Enabling agent to sell</li>
+                        <li><strong>Relationship Type:</strong> Transactional (per trip) vs Partnership (ongoing)</li>
+                        <li><strong>Training Focus:</strong> Sales skills (B2C) vs Platform + Marketing tools (B2B)</li>
+                        <li><strong>Account Management:</strong> Individual experts vs SPOC/KAM model</li>
+                        <li><strong>Quote Origin:</strong> Expert-created vs Agent-created</li>
+                        <li><strong>Growth Strategy:</strong> Referrals (B2C) vs PCP/Partner programmes (B2B)</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card opportunity">
+                    <h3>🟡 Optimisation Opportunities</h3>
+                    <ul>
+                        <li><strong>Shared Expert Pool:</strong> Train experts on both B2C consultative selling AND B2B agent support</li>
+                        <li><strong>Unified CRM:</strong> Single customer view - track both direct customers AND agents</li>
+                        <li><strong>Smart Routing:</strong> Same auto-assignment engine for both streams</li>
+                        <li><strong>Common Content Library:</strong> Flyers, itineraries, destination guides for both</li>
+                        <li><strong>Cross-Training:</strong> B2C experts can handle B2B overflow and vice versa</li>
+                        <li><strong>Shared Services:</strong> One payments team, one ops team, one delivery team</li>
+                        <li><strong>Feedback Integration:</strong> Agent feedback (B2B) + Customer feedback (B2C) → Product improvements</li>
+                        <li><strong>Hybrid Model:</strong> High-value B2C leads could become "agent-like" with dedicated SPOC</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-title">🎯 Recommended Implementation Roadmap (45 Days Total)</div>
+                <table>
+                    <tr><th>Phase</th><th>Action</th><th>Timeline</th><th>Cumulative</th><th>Impact</th></tr>
+                    <tr><td>1. Quick Wins</td><td>Merge Operations, Payments, Delivery teams</td><td>Days 1-10</td><td>Day 10</td><td>30% cost reduction</td></tr>
+                    <tr><td>2. Platform Alignment</td><td>Unified CRM with B2C/B2B interfaces</td><td>Days 11-25</td><td>Day 25</td><td>Single source of truth</td></tr>
+                    <tr><td>3. Training Integration</td><td>Modular training: Common core + specialised tracks</td><td>Days 26-35</td><td>Day 35</td><td>Flexible workforce</td></tr>
+                    <tr><td>4. Optimisation</td><td>Cross-training experts, hybrid models, go-live</td><td>Days 36-45</td><td>Day 45</td><td>Max utilisation</td></tr>
+                </table>
+                <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 8px; border-left: 4px solid #4caf50;">
+                    <strong>🚀 Accelerated Timeline:</strong> Fast-tracked 45-day programme enables rapid cost savings and operational efficiency. Parallel workstreams recommended for Days 11-25 to meet aggressive deadline.
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #FF6B35;"></div>
+                    <span>B2C Specific</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #004E89;"></div>
+                    <span>B2B Specific</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #7B2CBF;"></div>
+                    <span>Unified/Central</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2ECC71;"></div>
+                    <span>Closure/Success</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge">🔄 DUPLICATE</span>
+                    <span>Appears in Both Workflows</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showWorkflow(type) {
+            document.querySelectorAll('.workflow-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(type).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html> <div class="step-details">On-ground support during travel. Holiday app for itinerary/service info.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="connector" style="background: #004E89;"></div>
+
+                <div class="step-wrapper">
+                    <div class="step">
+                        <div class="step-number">13</div>
+                        <div class="step-content" style="background: rgba(155, 89, 182, 0.1); border-colour: #9B59B6;">
+                            <div class="step-header">
+                                <span class="step-name" style="colour: #9B59B6;">✅ Post-Trip Review</span>
+                                <span class="step-badges">
+                                    <span class="step-owner">CX / SPOC</span>
+                                    <span class="duplication-badge">🔄 DUPLICATE</span>
+                                </span>
+                            </div>
+                            <div class="step-details">Agent review captured. Repeat/referral loop. PCP (Partner Growth Programmes) for loyalty. Corrective action for negative feedback.</div>
+                            <div class="comment-bubble insight">
+                                <div class="comment-icon">🎯</div>
+                                <strong>Shared Process:</strong> B2C Step 12 matches this exactly. Same delivery team, same review capture, same corrective action workflow. Unify!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-title">📊 B2B Key Metrics</div>
+                <table>
+                    <tr><th>Metric</th><th>Target</th><th>Measurement</th></tr>
+                    <tr><td>Platform Training Completion</td><td>90%+</td><td>Training Tracker</td></tr>
+                    <tr><td>Profile Completion</td><td>95%+</td><td>Agent Profile</td></tr>
+                    <tr><td>Agent Retention</td><td>80%</td><td>FS Dashboard</td></tr>
+                    <tr><td>Ops Escalation TAT</td><td>24 hours</td><td>SLA Desk</td></tr>
+                    <tr><td>Quote → Booking</td><td>Market-based</td><td>Destination Dashboard</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Unified Workflow -->
+        <div id="unified" class="workflow-container unified-theme">
+            <div class="workflow-title" style="colour: #7B2CBF;">
+                <span>🔄</span> Unified Sales Workflow - Centralised Operations Model
+            </div>
+            <p class="workflow-subtitle">Hub & Spoke Architecture: Common backend, specialised frontends</p>
+
+            <div class="section">
+                <div class="section-header">Front End: Specialised Acquisition Streams</div>
+                <div class="streams">
+                    <div class="stream b2c-stream">
+                        <div class="stream-title">👤 B2C Direct Stream</div>
+                        <div class="stream-steps">
+                            <div class="stream-step">Lead Generation (SEM/Direct)</div>
+                            <div class="stream-step">FCD Qualification Layer</div>
+                            <div class="stream-step">Expert Allocation (Dest/City/Lang)</div>
+                            <div class="stream-step">Direct Consultative Selling</div>
+                            <div class="stream-step" style="background: #e8f5e9; border-left-colour: #4caf50;"><strong>→ Handoff to Central Hub</strong></div>
+                        </div>
+                    </div>
+                    <div class="stream b2b-stream">
+                        <div class="stream-title">🏢 B2B Agent Stream</div>
+                        <div class="stream-steps">
+                            <div class="stream-step">Self-Registration (Nexus)</div>
+                            <div class="stream-step">Verification & Onboarding</div>
+                            <div class="stream-step">Two-Track Training System</div>
+                            <div class="stream-step">SPOC Assignment (KAM/Field)</div>
+                            <div class="stream-step">Agent Self-Quote Creation</div>
+                            <div class="stream-step" style="background: #e8f5e9; border-left-colour: #4caf50;"><strong>→ Handoff to Central Hub</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="central-hub">
+                <div class="central-title">⚙️ CENTRAL HUB: Shared Operations Core</div>
+                <div style="background: #fff3cd; border: 2px solid #FFD93D; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: centre;">
+                    <strong>🔄 All steps below are duplicated in BOTH B2B and B2C workflows</strong><br>
+                    <span style="font-size: 0.9em; colour: #744210;">Centralising these eliminates duplication and maximises resource utilisation</span>
+                </div>
+                <div class="central-steps">
+                    <div class="central-step">
+                        Quote Management System
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">B2C: Expert creates | B2B: Agent creates</span>
+                    </div>
+                    <div class="central-step">
+                        Destination Expert Support
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Shared pool serves both streams</span>
+                    </div>
+                    <div class="central-step">
+                        Follow-up & Revision Cycle
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Same process, different entry points</span>
+                    </div>
+                    <div class="central-step">
+                        Closure Enablement
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">B2C: Direct | B2B: Via agent</span>
+                    </div>
+                    <div class="central-step">
+                        Ops Handover & Confirmations
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Single ops team</span>
+                    </div>
+                    <div class="central-step">
+                        Payments & Voucher Management
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Unified payments team</span>
+                    </div>
+                    <div class="central-step">
+                        Delivery Support
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Same on-ground team</span>
+                    </div>
+                    <div class="central-step">
+                        Holiday App
+                        <span style="display: block; font-size: 0.8em; colour: #666; margin-top: 5px;">Single platform</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="backend-section">
+                <div class="backend-title">📈 BACK END: Common Feedback & Growth Engine</div>
+                <div style="text-align: centre; margin-bottom: 15px; colour: #bdc3c7; font-size: 0.9em;">All components serve both B2C and B2B</div>
+                <div class="backend-grid">
+                    <div class="backend-item">Post-Trip Review Capture</div>
+                    <div class="backend-item">Feedback Loop & Corrective Action</div>
+                    <div class="backend-item">Repeat/Referral Programmes</div>
+                    <div class="backend-item">Performance Analytics</div>
+                    <div class="backend-item">Quality Assurance</div>
+                    <div class="backend-item">Training Calibration</div>
+                </div>
+            </div>
+
+            <div class="metric-box" style="margin-top: 30px;">
+                <div class="metric-title">💡 Unified Model Benefits</div>
+                <table>
+                    <tr><th>Aspect</th><th>Before (Siloed)</th><th>After (Unified)</th></tr>
+                    <tr><td>Operations Team</td><td>Separate B2C + B2B ops</td><td>Single Destination Expert pool</td></tr>
+                    <tr><td>Training</td><td>Different programmes</td><td>Modular: Common core + specialised tracks</td></tr>
+                    <tr><td>Technology</td><td>CRM + Nexus separate</td><td>Single platform, different interfaces</td></tr>
+                    <tr><td>Payments</td><td>Separate processes</td><td>Unified payment ops</td></tr>
+                    <tr><td>Delivery</td><td>Different teams</td><td>Shared on-ground support</td></tr>
+                    <tr><td>Reviews</td><td>Siloed feedback</td><td>Centralised CX analytics</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Analysis -->
+        <div id="analysis" class="workflow-container">
+            <div class="workflow-title" style="colour: #2c3e50;">
+                <span>🔍</span> Workflow Overlap Analysis & Recommendations
+            </div>
+            <p class="workflow-subtitle">Strategic analysis of commonalities, divergences, and optimisation opportunities</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card overlap">
+                    <h3>🟢 Major Overlaps (Centralise These)</h3>
+                    <ul>
+                        <li><strong>Destination Expert Support:</strong> Both need destination specialists for complex itineraries</li>
+                        <li><strong>Quote Creation Logic:</strong> 3-option model, multi-destination handling, pricing rules</li>
+                        <li><strong>Operations Handover:</strong> Flight/hotel confirmations, voucher generation</li>
+                        <li><strong>Payments Processing:</strong> Deposit handling, balance follow-up, TAT tracking</li>
+                        <li><strong>Delivery Support:</strong> On-ground assistance, Holiday app, emergency handling</li>
+                        <li><strong>Post-Trip Reviews:</strong> Feedback collection, Google reviews, corrective actions</li>
+                        <li><strong>SLA Management:</strong> 24h escalation rules, quality tracking</li>
+                        <li><strong>Training Content:</strong> Destination knowledge, product updates, visa rules</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card divergence">
+                    <h3>🔴 Key Divergences (Keep Separate)</h3>
+                    <ul>
+                        <li><strong>Acquisition Model:</strong> Direct leads vs Agent self-registration</li>
+                        <li><strong>Qualification:</strong> FCD (B2C) vs Verification Team (B2B)</li>
+                        <li><strong>Sales Approach:</strong> Direct selling vs Enabling agent to sell</li>
+                        <li><strong>Relationship Type:</strong> Transactional (per trip) vs Partnership (ongoing)</li>
+                        <li><strong>Training Focus:</strong> Sales skills (B2C) vs Platform + Marketing tools (B2B)</li>
+                        <li><strong>Account Management:</strong> Individual experts vs SPOC/KAM model</li>
+                        <li><strong>Quote Origin:</strong> Expert-created vs Agent-created</li>
+                        <li><strong>Growth Strategy:</strong> Referrals (B2C) vs PCP/Partner programmes (B2B)</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card opportunity">
+                    <h3>🟡 Optimisation Opportunities</h3>
+                    <ul>
+                        <li><strong>Shared Expert Pool:</strong> Train experts on both B2C consultative selling AND B2B agent support</li>
+                        <li><strong>Unified CRM:</strong> Single customer view - track both direct customers AND agents</li>
+                        <li><strong>Smart Routing:</strong> Same auto-assignment engine for both streams</li>
+                        <li><strong>Common Content Library:</strong> Flyers, itineraries, destination guides for both</li>
+                        <li><strong>Cross-Training:</strong> B2C experts can handle B2B overflow and vice versa</li>
+                        <li><strong>Shared Services:</strong> One payments team, one ops team, one delivery team</li>
+                        <li><strong>Feedback Integration:</strong> Agent feedback (B2B) + Customer feedback (B2C) → Product improvements</li>
+                        <li><strong>Hybrid Model:</strong> High-value B2C leads could become "agent-like" with dedicated SPOC</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="metric-box">
+                <div class="metric-title">🎯 Recommended Implementation Roadmap (45 Days Total)</div>
+                <table>
+                    <tr><th>Phase</th><th>Action</th><th>Timeline</th><th>Cumulative</th><th>Impact</th></tr>
+                    <tr><td>1. Quick Wins</td><td>Merge Operations, Payments, Delivery teams</td><td>Days 1-10</td><td>Day 10</td><td>30% cost reduction</td></tr>
+                    <tr><td>2. Platform Alignment</td><td>Unified CRM with B2C/B2B interfaces</td><td>Days 11-25</td><td>Day 25</td><td>Single source of truth</td></tr>
+                    <tr><td>3. Training Integration</td><td>Modular training: Common core + specialised tracks</td><td>Days 26-35</td><td>Day 35</td><td>Flexible workforce</td></tr>
+                    <tr><td>4. Optimisation</td><td>Cross-training experts, hybrid models, go-live</td><td>Days 36-45</td><td>Day 45</td><td>Max utilisation</td></tr>
+                </table>
+                <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 8px; border-left: 4px solid #4caf50;">
+                    <strong>🚀 Accelerated Timeline:</strong> Fast-tracked 45-day programme enables rapid cost savings and operational efficiency. Parallel workstreams recommended for Days 11-25 to meet aggressive deadline.
+                </div>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-colour" style="background: #FF6B35;"></div>
+                    <span>B2C Specific</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-colour" style="background: #004E89;"></div>
+                    <span>B2B Specific</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-colour" style="background: #7B2CBF;"></div>
+                    <span>Unified/Central</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-colour" style="background: #2ECC71;"></div>
+                    <span>Closure/Success</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-badge">🔄 DUPLICATE</span>
+                    <span>Appears in Both Workflows</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showWorkflow(type) {
+            // Hide all containers
+            document.querySelectorAll('.workflow-container').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected container
+            document.getElementById(type).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
