@@ -8,17 +8,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ─── Reset ─────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;background:#F0F3F8;color:#1A2332;min-height:100vh}
-
-/* ─── Colour tokens ──────────────────── */
 :root{
   --tf-navy:#1A2E4A;--tf-red:#E8373A;--tf-yellow:#F5C200;--tf-green:#2BAD4E;--tf-blue:#1A73E8;
   --page-bg:#F0F3F8;--card:#fff;--card2:#F7F9FC;--bd:#DDE3EE;--bd2:#C4CCE0;
   --t1:#1A2332;--t2:#3D4F6E;--t3:#8A94A8;
-  /* departments */
   --s-bg:#EEF8E4;--s-bd:#3D8A14;--s-tx:#255A08;--s-acc:#3D8A14;
   --b-bg:#E8F2FF;--b-bd:#1565D8;--b-tx:#0A3E96;--b-acc:#1565D8;
   --f-bg:#FCE6F2;--f-bd:#B82D6C;--f-tx:#7A1548;--f-acc:#B82D6C;
@@ -26,111 +22,114 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
   --t-bg:#E2F7F0;--t-bd:#138A62;--t-tx:#085A40;--t-acc:#138A62;
   --o-bg:#ECEAFF;--o-bd:#4F46CC;--o-tx:#2D2590;--o-acc:#4F46CC;
   --d-bg:#FDF0E4;--d-bd:#C05C00;--d-tx:#7A3800;--d-acc:#C05C00;
-  /* gates */
   --g-bg:#FEF0F0;--g-bd:#C02020;--g-tx:#7A1010;
   --w-bg:#FFF8E6;--w-bd:#B87800;--w-tx:#6A4800;
   --p-bg:#E6F7F0;--p-bd:#138A62;--p-tx:#085A40;
   --r:8px;--r-lg:12px;
 }
+.outer{max-width:1340px;margin:0 auto;padding:0 1.25rem 4rem}
 
-/* ─── Outer wrapper ──────────────────── */
-.outer{max-width:1300px;margin:0 auto;padding:0 1.25rem 4rem}
-
-/* ─── Header ─────────────────────────── */
+/* ── Header ── white bg, logo clear ── */
 .site-hdr{
-  display:grid;grid-template-columns:180px 1fr auto;
+  background:#fff;
+  display:grid;grid-template-columns:200px 1fr auto;
   align-items:center;gap:1.5rem;
-  padding:1.25rem 0;
-  border-bottom:1px solid var(--bd);
-  margin-bottom:1.5rem;
-  position:relative;
+  padding:1.1rem 1.5rem;
+  border-radius:var(--r-lg);
+  box-shadow:0 2px 8px rgba(26,46,74,.08);
+  margin:1rem 0 1.25rem;
+  position:relative;overflow:hidden;
 }
 .site-hdr::after{
-  content:'';position:absolute;bottom:-1px;left:0;right:0;height:3px;
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
   background:linear-gradient(to right,var(--tf-red) 25%,var(--tf-yellow) 25% 50%,var(--tf-green) 50% 75%,var(--tf-blue) 75%);
 }
-.tf-logo{width:160px;height:auto;display:block}
+.tf-logo{width:180px;height:auto;display:block}
 .hdr-eyebrow{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tf-red);margin-bottom:.25rem;font-family:'IBM Plex Mono',monospace}
-.hdr-title{font-size:24px;font-weight:700;color:var(--tf-navy);margin-bottom:.2rem}
+.hdr-title{font-size:23px;font-weight:700;color:var(--tf-navy);margin-bottom:.2rem}
 .hdr-sub{font-size:12px;color:var(--t3)}
 .hdr-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t3)}
 .hdr-badge{padding:3px 9px;border-radius:99px;background:#FFF4E0;border:1px solid var(--tf-yellow);color:#7A5000;font-size:9px;font-weight:600;letter-spacing:.06em}
 
-/* ─── Stats ──────────────────────────── */
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.5rem}
-.stat{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.75rem;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.25rem}
+.stat{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.7rem;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .stat-n{font-size:26px;font-weight:700;color:var(--tf-navy);line-height:1;display:block;margin-bottom:2px}
 .stat-l{font-size:10px;color:var(--t3);font-family:'IBM Plex Mono',monospace}
 
-/* ─── Legend ─────────────────────────── */
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.75rem 1rem;margin-bottom:1.5rem}
+/* ── Legend ── */
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:.7rem 1rem;margin-bottom:1.25rem}
 .li{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t2);font-family:'IBM Plex Mono',monospace}
 .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
-/* ─── Booking type tabs ───────────────── */
-.booking-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:var(--card);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.bt{
-  flex:1;padding:.65rem 1rem;text-align:center;
-  font-size:13px;font-weight:600;cursor:pointer;
-  border-right:1px solid var(--bd);
-  background:var(--card2);color:var(--t3);
-  transition:background .15s,color .15s;
-  user-select:none;
-}
-.bt:last-child{border-right:none}
-.bt:hover{background:#EEF2FA;color:var(--t2)}
-.bt.active{background:var(--tf-navy);color:#fff}
-.bt .bt-badge{
-  display:inline-block;margin-left:5px;font-size:9px;
-  padding:1px 5px;border-radius:99px;vertical-align:middle;
-  font-family:'IBM Plex Mono',monospace;font-weight:500;
-}
-.bt.active .bt-badge{background:rgba(255,255,255,.2);color:#fff}
-.bt:not(.active) .bt-badge{background:var(--bd);color:var(--t3)}
+/* ── Column headers ── */
+.col-headers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.col-hdr{background:var(--tf-navy);color:#fff;padding:.65rem .9rem;border-radius:var(--r);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.col-hdr-tag{font-size:9px;font-family:'IBM Plex Mono',monospace;opacity:.65;font-weight:400}
+.col-fit .col-hdr{background:#17426E}
+.col-b2b .col-hdr{background:#113257}
 
-/* ─── View panels ────────────────────── */
-.view-panel{display:none}
-.view-panel.active{display:block}
-
-/* ─── 3-column grid ──────────────────── */
-.col-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start}
-.col-hdr{
-  background:var(--tf-navy);color:#fff;
-  padding:.6rem .85rem;border-radius:var(--r) var(--r) 0 0;
-  margin-bottom:0;font-size:12px;font-weight:600;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.col-hdr-tag{font-size:9px;font-family:'IBM Plex Mono',monospace;opacity:.7;font-weight:400}
-.col-group .col-hdr{background:var(--tf-navy)}
-.col-fit   .col-hdr{background:#17426E}
-.col-b2b   .col-hdr{background:#12375A}
-
-.col-body{display:flex;flex-direction:column;gap:6px;padding:0}
-
-/* ─── Phase header ────────────────────── */
-.phase-hdr{
-  display:flex;align-items:center;gap:.6rem;
-  margin:1.5rem 0 .5rem;
-  grid-column:1/-1;
-}
+/* ── Main grid ── */
+.col-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:start}
+.phase-hdr{grid-column:1/-1;display:flex;align-items:center;gap:.6rem;margin:1.5rem 0 .5rem}
 .phase-hdr-line{flex:1;height:1.5px;background:var(--bd)}
-.phase-num{font-size:9px;font-weight:700;background:var(--tf-navy);color:#fff;padding:2px 9px;border-radius:99px;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;white-space:nowrap;flex-shrink:0}
+.step-num-pill{
+  font-size:10px;font-weight:700;
+  background:var(--tf-navy);color:#fff;
+  padding:3px 11px;border-radius:99px;
+  font-family:'IBM Plex Mono',monospace;
+  letter-spacing:.04em;white-space:nowrap;flex-shrink:0;
+}
 .phase-tag{font-size:12px;font-weight:600;color:var(--t2);white-space:nowrap;flex-shrink:0}
+.phase-icon{font-size:16px;flex-shrink:0}
 
-/* ─── Shared row (spans all 3 cols) ──── */
+/* ── Policy extract tooltip ── */
+.policy-btn{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:9px;font-weight:600;
+  padding:2px 7px;border-radius:99px;
+  background:#EEF2FF;border:1px solid #B0ACEA;color:#3A3AA0;
+  cursor:pointer;font-family:'IBM Plex Mono',monospace;
+  margin-left:6px;vertical-align:middle;
+  transition:background .12s;
+}
+.policy-btn:hover{background:#DDE5FF}
+.policy-popup{
+  display:none;
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(520px,90vw);max-height:70vh;overflow-y:auto;
+  background:#fff;border:1.5px solid var(--bd);border-radius:var(--r-lg);
+  box-shadow:0 16px 48px rgba(0,0,0,.18);
+  z-index:9999;
+}
+.policy-popup.show{display:block}
+.policy-popup-hdr{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.75rem 1rem;border-bottom:1px solid var(--bd);
+  position:sticky;top:0;background:#fff;z-index:1;
+}
+.policy-popup-icon{font-size:20px}
+.policy-popup-title{flex:1;font-size:14px;font-weight:600;color:var(--tf-navy)}
+.policy-popup-close{
+  cursor:pointer;font-size:20px;color:var(--t3);
+  padding:0 4px;line-height:1;
+  border:none;background:none;
+}
+.policy-popup-body{padding:.85rem 1rem;font-size:12.5px;color:var(--t2);line-height:1.75}
+.policy-popup-body strong{color:var(--t1);font-weight:600}
+.policy-popup-body ul{padding-left:1.1rem;margin:.3rem 0}
+.policy-popup-body li{margin-bottom:3px}
+.policy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:9998}
+.policy-overlay.show{display:block}
+
+/* ── Shared row ── */
 .shared-row{grid-column:1/-1}
-.shared-label{
-  display:flex;align-items:center;gap:.5rem;margin-bottom:4px;
-  font-size:10px;font-weight:600;color:var(--t3);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em;
-}
+.shared-label{display:flex;align-items:center;gap:.5rem;margin-bottom:4px;font-size:10px;font-weight:600;color:var(--t3);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
 .shared-label::before,.shared-label::after{content:'';flex:1;height:1px;background:var(--bd)}
+.shared-gate-wrap{grid-column:1/-1}
 
-/* ─── Swimlane ────────────────────────── */
-.swim{
-  background:var(--card);border:1px solid var(--bd);
-  border-radius:var(--r);overflow:hidden;margin-bottom:0;
-  box-shadow:0 1px 3px rgba(0,0,0,.04);
-}
+/* ── Swimlane ── */
+.swim{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .swim.sw-s{border-left:3px solid var(--s-acc)}
 .swim.sw-b{border-left:3px solid var(--b-acc)}
 .swim.sw-f{border-left:3px solid var(--f-acc)}
@@ -140,7 +139,8 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .swim.sw-d{border-left:3px solid var(--d-acc)}
 .swim.sw-x{border-left:3px solid var(--bd2)}
 
-.swim-label{padding:.55rem .7rem;background:var(--card2);border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.swim-label{padding:.5rem .7rem;background:var(--card2);border-bottom:1px solid var(--bd)}
+.swim-dept-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px}
 .swim-dept-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;border:1px solid;letter-spacing:.03em;font-family:'IBM Plex Mono',monospace}
 .sd-s{background:var(--s-bg);color:var(--s-tx);border-color:var(--s-bd)}
 .sd-b{background:var(--b-bg);color:var(--b-tx);border-color:var(--b-bd)}
@@ -149,18 +149,25 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .sd-t{background:var(--t-bg);color:var(--t-tx);border-color:var(--t-bd)}
 .sd-o{background:var(--o-bg);color:var(--o-tx);border-color:var(--o-bd)}
 .sd-d{background:var(--d-bg);color:var(--d-tx);border-color:var(--d-bd)}
-.swim-roles{font-size:10px;color:var(--t3);font-style:italic}
+
+/* Staff levels in swim label */
+.staff-levels{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.staff-chip{font-size:9px;padding:1px 6px;border-radius:99px;border:1px solid;font-family:'IBM Plex Mono',monospace;font-weight:500}
+.sc-mgr{background:#FFF0E8;color:#8A3A00;border-color:#E8A080}
+.sc-sup{background:#F0EEF0;color:#4A3A6A;border-color:#C0B0D8}
+.sc-stf{background:#EEF4FF;color:#1A4080;border-color:#A0BBE0}
+
 .swim-content{padding:.6rem;display:flex;flex-direction:column;gap:5px}
 
-/* ─── Step cards ──────────────────────── */
+/* ── Step cards ── */
 .step{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;cursor:pointer;background:#fff;transition:border-color .15s,box-shadow .15s}
 .step:hover{border-color:var(--bd2);box-shadow:0 2px 6px rgba(26,46,74,.07)}
 .step-hd{display:flex;align-items:flex-start;gap:7px;padding:.5rem .65rem}
-.step-num{font-size:10px;font-weight:700;color:var(--tf-red);font-family:'IBM Plex Mono',monospace;flex-shrink:0;min-width:22px;padding-top:2px}
+.step-n{font-size:10px;font-weight:700;color:var(--tf-red);font-family:'IBM Plex Mono',monospace;flex-shrink:0;min-width:22px;padding-top:2px}
 .step-body{flex:1;min-width:0}
 .step-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:1px;line-height:1.3}
 .step-sub{font-size:11px;color:var(--t3);line-height:1.4}
-.step-roles{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
+.step-meta{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px;align-items:center}
 .role-chip{font-size:9px;font-weight:500;padding:1px 6px;border-radius:5px;border:1px solid;font-family:'IBM Plex Mono',monospace}
 .rc-s{background:var(--s-bg);color:var(--s-tx);border-color:var(--s-bd)}
 .rc-b{background:var(--b-bg);color:var(--b-tx);border-color:var(--b-bd)}
@@ -169,27 +176,25 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .rc-t{background:var(--t-bg);color:var(--t-tx);border-color:var(--t-bd)}
 .rc-o{background:var(--o-bg);color:var(--o-tx);border-color:var(--o-bd)}
 .rc-d{background:var(--d-bg);color:var(--d-tx);border-color:var(--d-bd)}
-.step-toggle{font-size:16px;color:var(--t3);flex-shrink:0;line-height:1;transition:transform .2s;user-select:none;font-weight:300;padding-top:1px}
+.diff-note{display:inline-block;font-size:9px;font-weight:600;padding:1px 5px;border-radius:99px;background:#EEF2FF;color:#3A3AA0;border:1px solid #B0ACEA;font-family:'IBM Plex Mono',monospace}
+.step-toggle{font-size:16px;color:var(--t3);flex-shrink:0;transition:transform .2s;user-select:none;font-weight:300;padding-top:1px}
 .step-toggle.open{transform:rotate(90deg)}
-.step-detail{border-top:1px solid var(--bd);padding:.55rem .65rem .65rem calc(.65rem + 29px);font-size:12px;color:var(--t2);line-height:1.7;display:none;background:#FAFBFE}
+.step-detail{border-top:1px solid var(--bd);padding:.55rem .65rem .65rem calc(.65rem + 29px);font-size:12px;color:var(--t2);line-height:1.75;display:none;background:#FAFBFE}
 .step-detail.show{display:block}
 .step-detail strong{color:var(--t1);font-weight:600}
 .step-detail ul{padding-left:1.1rem;margin:.3rem 0}
 .step-detail li{margin-bottom:3px;color:var(--t2)}
 .step-detail li strong{color:var(--t1)}
 
-/* ─── Diff badge ──────────────────────── */
-.diff-note{display:inline-block;font-size:9px;font-weight:600;padding:1px 6px;border-radius:99px;background:#EEF2FF;color:#3A3AA0;border:1px solid #B0ACEA;font-family:'IBM Plex Mono',monospace;margin-top:4px}
-
-/* ─── Gates ───────────────────────────── */
+/* ── Gates ── */
 .gate{border-radius:var(--r);overflow:hidden;border:1px solid;cursor:pointer}
-.gate-hd{display:flex;align-items:center;gap:6px;padding:.5rem .65rem}
+.gate-hd{display:flex;align-items:center;gap:6px;padding:.5rem .7rem}
 .gate-icon{font-size:13px;flex-shrink:0;font-weight:700}
 .gate-title{flex:1;font-size:12px;font-weight:600;line-height:1.3}
 .gate-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;flex-shrink:0;color:#fff;font-family:'IBM Plex Mono',monospace;letter-spacing:.05em}
 .gate-chev{font-size:13px;flex-shrink:0;transition:transform .2s;opacity:.45}
 .gate-chev.open{transform:rotate(90deg)}
-.gate-body{border-top:1px solid rgba(0,0,0,.07);padding:.5rem .65rem;font-size:12px;line-height:1.7;display:none}
+.gate-body{border-top:1px solid rgba(0,0,0,.07);padding:.5rem .7rem;font-size:12px;line-height:1.7;display:none}
 .gate-body.show{display:block}
 .gate-body strong{font-weight:600}
 .gate-body ul{padding-left:1.1rem;margin:.3rem 0}
@@ -201,62 +206,53 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .gate.pass{background:var(--p-bg);border-color:var(--p-bd);color:var(--p-tx)}
 .gate.pass .gate-badge{background:var(--p-bd)}
 
-/* ─── Shared-gate (full width) ────────── */
-.shared-gate-wrap{grid-column:1/-1}
-
-/* ─── Final bar ───────────────────────── */
+/* ── Rule bar ── */
 .rule-bar{margin:2rem 0 0;padding:1.25rem 1.5rem;background:var(--tf-navy);border-radius:var(--r-lg);text-align:center}
-.rule-bar p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:.3rem}
+.rule-bar p{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:.3rem}
 .rule-bar strong{font-size:15px;color:#fff;font-weight:500;line-height:1.8}
 .rule-bar span{color:#FFD44A}
 .rule-stripe{height:4px;background:linear-gradient(to right,var(--tf-red) 25%,var(--tf-yellow) 25% 50%,var(--tf-green) 50% 75%,var(--tf-blue) 75%);border-radius:0 0 var(--r-lg) var(--r-lg);margin-top:-4px}
 
-/* ─── Footer ──────────────────────────── */
 footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 
-/* ─── Responsive ──────────────────────── */
 @media(max-width:1050px){
-  .col-grid{grid-template-columns:1fr}
+  .col-grid,.col-headers{grid-template-columns:1fr}
+  .phase-hdr,.shared-row,.shared-gate-wrap{grid-column:1}
   .col-hdr{border-radius:var(--r)}
-  .phase-hdr{grid-column:1}
-  .shared-row{grid-column:1}
-  .shared-gate-wrap{grid-column:1}
 }
 @media(max-width:680px){
   .stats{grid-template-columns:repeat(3,1fr)}
-  .site-hdr{grid-template-columns:110px 1fr;gap:.75rem}
+  .site-hdr{grid-template-columns:130px 1fr;gap:.75rem;padding:.85rem 1rem}
   .hdr-meta{display:none}
-  .tf-logo{width:100px}
-  .hdr-title{font-size:18px}
+  .tf-logo{width:120px}
+  .hdr-title{font-size:17px}
 }
 @media print{
   body{background:#fff}
   .step-detail,.gate-body{display:block!important}
-  .step-toggle{display:none}
+  .step-toggle,.policy-btn{display:none}
 }
 </style>
 </head>
 <body>
 <div class="outer">
 
-<!-- ── Header ─────────────────────────── -->
+<!-- ── HEADER ─────────────────────────────────────────── -->
 <header class="site-hdr">
-  <div>
-    <img src="data:image/jpeg;base64,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" alt="TripFactory" class="tf-logo">
-  </div>
+  <div><img src="data:image/jpeg;base64,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" alt="TripFactory" class="tf-logo"></div>
   <div>
     <div class="hdr-eyebrow">Tour Booking Policy — Edition I, MMXXVI</div>
     <h1 class="hdr-title">Booking Workflow — All Booking Types</h1>
-    <p class="hdr-sub">Group Tours · FIT Individual · B2B Agent &amp; Corporate · Departments &amp; roles · All gates</p>
+    <p class="hdr-sub">Group Tours · FIT Individual · B2B Agent &amp; Corporate · Departments, Roles &amp; Staff Levels · All Gates</p>
   </div>
   <div class="hdr-meta">
-    <span class="hdr-badge">WORKING DRAFT</span>
+    <span class="hdr-badge">WORKING DRAFT · I</span>
     <span>Ops &amp; Sales Control Desk</span>
     <span>Companion to TM Policy</span>
   </div>
 </header>
 
-<!-- ── Stats ──────────────────────────── -->
+<!-- ── STATS ────────────────────────────────────────────── -->
 <div class="stats">
   <div class="stat"><span class="stat-n">7</span><span class="stat-l">Gates (5 hard · 2 warn)</span></div>
   <div class="stat"><span class="stat-n">3</span><span class="stat-l">Booking types</span></div>
@@ -265,7 +261,7 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <div class="stat"><span class="stat-n">11</span><span class="stat-l">Booking Owner duties</span></div>
 </div>
 
-<!-- ── Legend ─────────────────────────── -->
+<!-- ── LEGEND ───────────────────────────────────────────── -->
 <div class="legend">
   <div class="li"><div class="ld" style="background:var(--s-acc)"></div>Sales</div>
   <div class="li"><div class="ld" style="background:var(--b-acc)"></div>Booking Owner</div>
@@ -274,73 +270,91 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <div class="li"><div class="ld" style="background:var(--t-acc)"></div>Ticketing</div>
   <div class="li"><div class="ld" style="background:var(--o-acc)"></div>Operations</div>
   <div class="li"><div class="ld" style="background:var(--d-acc)"></div>Driver / Supplier</div>
+  <div class="li"><span style="font-size:10px;background:#FFF0E8;color:#8A3A00;border:1px solid #E8A080;padding:1px 6px;border-radius:99px;font-family:monospace">MGR</span> Manager</div>
+  <div class="li"><span style="font-size:10px;background:#F0EEF0;color:#4A3A6A;border:1px solid #C0B0D8;padding:1px 6px;border-radius:99px;font-family:monospace">SUP</span> Supervisor</div>
+  <div class="li"><span style="font-size:10px;background:#EEF4FF;color:#1A4080;border:1px solid #A0BBE0;padding:1px 6px;border-radius:99px;font-family:monospace">STF</span> Staff</div>
   <div class="li"><div class="ld" style="background:var(--g-bd);border-radius:2px"></div>Hard gate</div>
   <div class="li"><div class="ld" style="background:var(--w-bd);border-radius:2px"></div>Warning gate</div>
-  <div class="li"><div class="ld" style="background:var(--p-bd);border-radius:2px"></div>Gate cleared</div>
+  <div class="li"><span style="font-size:10px;background:#EEF2FF;color:#3A3AA0;border:1px solid #B0ACEA;padding:1px 6px;border-radius:99px;font-family:monospace;font-weight:600">§ Policy</span> Click for policy extract</div>
   <div class="li" style="color:var(--t3);font-style:italic">↕ Click steps &amp; gates to expand</div>
 </div>
 
-<!-- ── Column headers ─────────────────── -->
-<div class="col-grid" style="margin-bottom:8px">
-  <div class="col-hdr col-group"><span>Group Tour Booking</span><span class="col-hdr-tag">GTE · WOE · ISP · all group departures</span></div>
-  <div class="col-hdr col-fit"><span>FIT Booking</span><span class="col-hdr-tag">Individual · custom itinerary · single pax or couple</span></div>
-  <div class="col-hdr col-b2b"><span>B2B Booking</span><span class="col-hdr-tag">Agent · corporate · trade partner</span></div>
+<!-- ── COLUMN HEADERS ─────────────────────────────────── -->
+<div class="col-headers">
+  <div class="col-hdr col-group"><span>📅 Group Tour Booking</span><span class="col-hdr-tag">GTE · WOE · ISP · all group departures</span></div>
+  <div class="col-hdr col-fit" style="background:#17426E"><span>👤 FIT Individual Booking</span><span class="col-hdr-tag">Custom itinerary · solo · couple · small group</span></div>
+  <div class="col-hdr col-b2b" style="background:#113257"><span>🤝 B2B Agent / Corporate</span><span class="col-hdr-tag">Trade agent · corporate client · partner</span></div>
 </div>
 
-<!-- ════════════════════════════
-     PHASE 1 — ENQUIRY & SALE
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEP 1 — ENQUIRY & FIRST CONTACT
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phase 1</span>
+    <span class="phase-icon">📋</span>
+    <span class="step-num-pill">Step 1</span>
     <span class="phase-tag">Enquiry &amp; first contact</span>
+    <button class="policy-btn" onclick="openPolicy('p1')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
-  <!-- GROUP col -->
+  <!-- GROUP -->
   <div class="swim sw-s">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-s">Sales</div>
-      <span class="swim-roles">Sales Expert · Senior Sales · Branch Manager</span>
+      <div class="swim-dept-row">
+        <div class="swim-dept-tag sd-s">🗣 Sales</div>
+      </div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Branch Manager</span>
+        <span class="staff-chip sc-sup">SUP Senior Sales</span>
+        <span class="staff-chip sc-stf">STF Sales Expert</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">01</div>
+          <div class="step-n">1.1</div>
           <div class="step-body">
             <div class="step-title">Group enquiry received</div>
             <div class="step-sub">WhatsApp · call · walk-in · referral</div>
-            <div class="step-roles"><span class="role-chip rc-s">Sales Expert</span></div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">Sales Expert</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          Enquiry ≠ booking. No system entry, no inventory block. Sales Expert logs interest only. Groups over 15 pax reviewed by Senior Sales. <strong>Min group size</strong> applies — smaller enquiries redirect to FIT track.<br><br>
-          <strong>Sales Expert duties at enquiry:</strong> Identify departure date interest · note approx pax count · check departure availability · send product brochure · log in CRM within 24hrs.
+          Enquiry ≠ booking. No system entry, no inventory block. Sales Expert logs interest only. <strong>Groups over 15 pax</strong> reviewed by Senior Sales. Smaller enquiries redirected to FIT track.<br><br>
+          <strong>Sales Expert duties at enquiry:</strong> Identify departure date interest · note approximate pax count · check departure availability · send product brochure · log in CRM within 24hrs.
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">02</div>
+          <div class="step-n">1.2</div>
           <div class="step-body">
             <div class="step-title">Ground reality disclosure — 14 items</div>
-            <div class="step-sub">Hotels · rooms · meals · group timings — all disclosed before payment</div>
-            <div class="step-roles"><span class="role-chip rc-s">Sales Expert</span><span class="role-chip rc-b">Booking Owner</span></div>
+            <div class="step-sub">Hotels · rooms · meals · timings — before any payment</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">Sales Expert</span>
+              <span class="role-chip rc-b">Booking Owner</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          <strong>14 mandatory group disclosures:</strong>
+          <strong>14 mandatory group disclosures — customer must sign each:</strong>
           <ul>
             <li>Hotels may be outside city centre / highway zone</li>
             <li>Triple rooms may be double + sofa/extra bed</li>
             <li>Some meals may be packed (early starts, long drives)</li>
-            <li>Group timings are fixed — individual flexibility limited</li>
+            <li>Group timings fixed — individual flexibility limited</li>
             <li>Walking required at many European sites</li>
-            <li>Transfers are common group — private is extra</li>
+            <li>Transfers are common group — private is chargeable</li>
             <li>Early check-in / late checkout not guaranteed</li>
-            <li>Flights may have layovers, airline may change</li>
+            <li>Flights may have layovers; airline may change</li>
             <li>Optionals cost extra unless written in package</li>
             <li>Room upgrades / views not guaranteed</li>
             <li>Jain / special dietary must be pre-requested</li>
@@ -348,182 +362,273 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
             <li>Tour Manager runs the group — no private customisation</li>
             <li>Special requests need written approval — not auto-guaranteed</li>
           </ul>
-          Customer signs acknowledgement. Missing = Sales-side failure.
+          Missing acknowledgement = Sales-side failure.
+        </div>
+      </div>
+      <div class="step" onclick="tog(this)">
+        <div class="step-hd">
+          <div class="step-n">1.3</div>
+          <div class="step-body">
+            <div class="step-title">Package &amp; pricing locked</div>
+            <div class="step-sub">Departure date · package version · inclusions in writing</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">Sales Expert</span>
+              <span class="role-chip rc-s">Branch Manager (discounts)</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <span class="staff-chip sc-mgr">MGR</span>
+            </div>
+          </div>
+          <div class="step-toggle">›</div>
+        </div>
+        <div class="step-detail">
+          No recorded discount = no discount. No written inclusion = no commitment. Any price deviation from standard approved by Branch Manager and recorded. Agent commissions documented and signed.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FIT col -->
+  <!-- FIT -->
   <div class="swim sw-s">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-s">Sales</div>
-      <span class="swim-roles">FIT Sales Expert · Product Consultant</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-s">🗣 Sales</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Sales Manager</span>
+        <span class="staff-chip sc-sup">SUP Product Consultant Lead</span>
+        <span class="staff-chip sc-stf">STF FIT Sales Expert</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">01</div>
+          <div class="step-n">1.1</div>
           <div class="step-body">
             <div class="step-title">Individual enquiry received</div>
-            <div class="step-sub">Solo · couple · family · custom itinerary request</div>
-            <div class="step-roles"><span class="role-chip rc-s">FIT Sales Expert</span></div>
-            <div class="diff-note">FIT — individual pax, no group departure</div>
+            <div class="step-sub">Solo · couple · family · custom itinerary</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">FIT Sales Expert</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <div class="diff-note">FIT — individual, no group departure</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          FIT bookings are <strong>individual or small-group</strong> (1–6 pax typically) with custom or semi-custom itineraries. No fixed group departure. Sales Expert is Product Consultant — builds the itinerary around the customer's dates and preferences.<br><br>
-          <strong>FIT Sales Expert duties at enquiry:</strong> Understand travel dates · pax profile · budget bracket · customisation requirements · flight preferences · visa situation · log in CRM as FIT enquiry (separate from group pipeline).
+          FIT = <strong>individual or small group</strong> (1–6 pax) with custom or semi-custom itinerary. No fixed group departure. FIT Sales Expert is effectively a Product Consultant — builds itinerary around customer dates and preferences.<br><br>
+          <strong>FIT Sales Expert duties:</strong> Understand travel dates · pax profile · budget bracket · customisation level · flight preferences · visa situation · log as FIT enquiry (separate from group pipeline).
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">02</div>
+          <div class="step-n">1.2</div>
           <div class="step-body">
-            <div class="step-title">Ground reality disclosure — adapted for FIT</div>
-            <div class="step-sub">Hotels · transfers · meals · flexibility limits</div>
-            <div class="step-roles"><span class="role-chip rc-s">FIT Sales Expert</span></div>
-            <div class="diff-note">FIT — more flexibility but stricter supplier commitment rules</div>
+            <div class="step-title">Ground reality disclosure — FIT adapted</div>
+            <div class="step-sub">Hotels · transfers · flexibility limits · supplier availability</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">FIT Sales Expert</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <div class="diff-note">FIT — more flexibility but stricter supplier rules</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          FIT disclosures overlap with group but key differences:
           <ul>
-            <li><strong>More flexibility</strong> on dates, hotels, room types — but all flexibility must be costed and confirmed in writing</li>
-            <li>Supplier availability is <strong>not guaranteed</strong> until booking deposit is received and supplier is blocked</li>
-            <li>Hotel check-in/out times: FIT may have better options but still not guaranteed without a paid supplement</li>
-            <li>Private transfers standard for FIT — but route, timing, vehicle type must be specified in writing</li>
-            <li>"Customisation" means what is written in the final itinerary. No verbal add-ons.</li>
+            <li>More flexibility on dates/hotels — but all flexibility must be costed and confirmed in writing</li>
+            <li>Supplier availability <strong>not guaranteed</strong> until deposit received and supplier blocked</li>
+            <li>Private transfers standard — but route, timing, vehicle type must be specified</li>
+            <li>"Customisation" = what is written in the final itinerary. No verbal add-ons.</li>
           </ul>
-          Same signature requirement as group — acknowledgement on file before payment.
+          Same signature requirement as group.
+        </div>
+      </div>
+      <div class="step" onclick="tog(this)">
+        <div class="step-hd">
+          <div class="step-n">1.3</div>
+          <div class="step-body">
+            <div class="step-title">Custom itinerary quoted &amp; priced</div>
+            <div class="step-sub">Routing · nights · services · all-in price in writing</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">FIT Sales Expert</span>
+              <span class="role-chip rc-s">Product Consultant Lead</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <span class="staff-chip sc-sup">SUP</span>
+            </div>
+          </div>
+          <div class="step-toggle">›</div>
+        </div>
+        <div class="step-detail">
+          Full costed itinerary produced and shared in writing before deposit. All inclusions itemised. Any "subject to availability" items flagged explicitly. Product Consultant Lead reviews all FIT quotes before they go to customer.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- B2B col -->
+  <!-- B2B -->
   <div class="swim sw-s">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-s">Sales</div>
-      <span class="swim-roles">B2B Sales Expert · Partner Manager</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-s">🗣 Sales</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Partner Manager</span>
+        <span class="staff-chip sc-sup">SUP B2B Account Lead</span>
+        <span class="staff-chip sc-stf">STF B2B Sales Expert</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">01</div>
+          <div class="step-n">1.1</div>
           <div class="step-body">
             <div class="step-title">Agent / corporate enquiry</div>
             <div class="step-sub">Trade agent · corporate client · partner referral</div>
-            <div class="step-roles"><span class="role-chip rc-s">B2B Sales Expert</span><span class="role-chip rc-s">Partner Manager</span></div>
-            <div class="diff-note">B2B — agent must be pre-registered</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">B2B Sales Expert</span>
+              <span class="role-chip rc-s">Partner Manager</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <span class="staff-chip sc-mgr">MGR</span>
+              <div class="diff-note">B2B — agent must be pre-registered</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          <strong>B2B pre-registration gate (§14):</strong> Agent or corporate partner must have a signed agreement on file before any booking is accepted. No exceptions.<br><br>
-          <strong>B2B Sales Expert duties:</strong> Verify agent registration status · check credit limit / payment terms · confirm commission structure is documented · log enquiry under agent account · escalate new agents to Partner Manager for onboarding before proceeding.
+          <strong>B2B pre-registration (§14):</strong> Agent must have a signed agreement on file before any booking is accepted. No exceptions.<br><br>
+          B2B Sales Expert: verify agent registration · check credit limit · confirm commission documented · log under agent account · escalate new agents to Partner Manager for onboarding.
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">02</div>
+          <div class="step-n">1.2</div>
           <div class="step-body">
-            <div class="step-title">Ground reality disclosure — agent responsibility</div>
-            <div class="step-sub">Agent must pass all disclosures to end customer</div>
-            <div class="step-roles"><span class="role-chip rc-s">B2B Sales Expert</span><span class="role-chip rc-b">Booking Owner</span></div>
-            <div class="diff-note">B2B — agent is accountable for end-customer disclosure</div>
+            <div class="step-title">Agent disclosure responsibility</div>
+            <div class="step-sub">Agent contractually responsible for passing disclosures to end customer</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">B2B Sales Expert</span>
+              <span class="role-chip rc-b">B2B Account Manager</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <div class="diff-note">B2B — agent is accountable to end customer</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          In B2B bookings, TripFactory provides disclosure materials to the agent. <strong>The agent is contractually responsible</strong> for passing all 14 ground reality items to the end customer.<br><br>
-          B2B Sales Expert must confirm: agent has received disclosure checklist · agent has signed that they will pass it on · end customer acknowledgement is in the agent's file (available on request). TripFactory is not liable for agent failure to disclose.
+          TripFactory provides disclosure materials to agent. <strong>Agent is contractually responsible</strong> for passing all 14 ground reality items to end customer. B2B Sales Expert confirms: agent received checklist · agent signed they will pass it on · end customer acknowledgement in agent's file (available on request). TripFactory not liable for agent failure to disclose.
+        </div>
+      </div>
+      <div class="step" onclick="tog(this)">
+        <div class="step-hd">
+          <div class="step-n">1.3</div>
+          <div class="step-body">
+            <div class="step-title">Agent pricing &amp; commission confirmed</div>
+            <div class="step-sub">Net rate · commission rate · credit terms — all documented</div>
+            <div class="step-meta">
+              <span class="role-chip rc-s">Partner Manager</span>
+              <span class="role-chip rc-f">Finance Executive</span>
+              <span class="staff-chip sc-mgr">MGR</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
+          </div>
+          <div class="step-toggle">›</div>
+        </div>
+        <div class="step-detail">
+          Net rate, commission rate, credit limit, and payment terms must all be in the signed agent agreement before any booking. Partner Manager countersigns. Finance Executive confirms credit terms are on record.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate A -->
+  <!-- Gate A shared -->
   <div class="shared-gate-wrap">
-    <div class="shared-label">Shared across all booking types</div>
+    <div class="shared-label">Shared — all booking types</div>
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
         <span class="gate-icon">⊘</span>
-        <div class="gate-title">Gate A — Disclosure gate · applies to Group, FIT, and B2B</div>
+        <div class="gate-title">Gate A — Disclosure gate · Group, FIT &amp; B2B</div>
         <span class="gate-badge">HARD STOP</span>
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Sales Expert + Booking Owner<br>
-        <strong>Group &amp; FIT:</strong> Customer must sign acknowledgement of all applicable ground reality items before any payment.<br>
-        <strong>B2B:</strong> Agent must sign that they have provided all disclosures to end customer before booking is created.<br><br>
-        <strong>If failed:</strong> No payment collected. File may not be opened. Sales Expert failure — not Ops or Tour Manager responsibility.
+        <strong>Owner:</strong> Sales Expert (STF) + Booking Owner (STF), supervised by Senior Sales (SUP)<br>
+        <strong>Group &amp; FIT:</strong> Customer signs acknowledgement of all applicable items before any payment.<br>
+        <strong>B2B:</strong> Agent signs that they have provided all disclosures to end customer before booking is created.<br><br>
+        <strong>If failed:</strong> No payment collected. File not opened. Sales Expert failure — not Ops or Tour Manager responsibility.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
-     PHASE 2 — BOOKING CONFIRMATION
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEP 2 — BOOKING CONFIRMATION
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phase 2</span>
+    <span class="phase-icon">✅</span>
+    <span class="step-num-pill">Step 2</span>
     <span class="phase-tag">Booking confirmation &amp; data collection</span>
+    <button class="policy-btn" onclick="openPolicy('p2')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
   <!-- GROUP -->
   <div class="swim sw-b">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-b">Booking Owner</div>
-      <span class="swim-roles">Named Booking Owner · Finance Executive</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-b">✓ Booking Owner</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Sales Manager (oversight)</span>
+        <span class="staff-chip sc-sup">SUP Senior Booking Executive</span>
+        <span class="staff-chip sc-stf">STF Named Booking Owner</span>
+        <span class="staff-chip sc-stf">STF Finance Executive</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">04</div>
+          <div class="step-n">2.1</div>
           <div class="step-body">
             <div class="step-title">Group deposit collected · Booking Owner assigned</div>
-            <div class="step-sub">Group deposit received · one named owner · file opened</div>
-            <div class="step-roles"><span class="role-chip rc-b">Booking Owner</span><span class="role-chip rc-f">Finance Executive</span></div>
+            <div class="step-sub">Deposit received · named owner · file opened in system</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">Booking Owner</span>
+              <span class="role-chip rc-f">Finance Executive</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
           <strong>Booking Owner — 11 duties (§03):</strong>
           <ul>
-            <li>Booking accuracy — package version, pax count, price on file</li>
+            <li>Booking accuracy — package, pax count, price on file</li>
             <li>Customer data — passport, PAN, DOB verified</li>
             <li>Visa readiness — docs, appointment, status tracked</li>
-            <li>Payments — deposit, TCS, final balance collected on schedule</li>
+            <li>Payments — deposit, TCS, final balance on schedule</li>
             <li>Flight sealing — name match verified, PNR confirmed</li>
-            <li>Rooming — single/twin/double/triple recorded per pax</li>
-            <li>Meals — veg/Jain/medical dietary per pax</li>
-            <li>Special requests — approved categories only, in writing</li>
+            <li>Rooming — single/twin/double/triple per pax</li>
+            <li>Meals — veg/Jain/medical per pax</li>
+            <li>Special requests — approved categories, in writing</li>
             <li>Optionals — system entry + payment confirmed</li>
             <li>Customer expectation — ground-reality brief on file</li>
             <li>Handover — clean complete file to Ops</li>
           </ul>
-          <strong>Hand-off rule:</strong> One named owner per booking. Replacement requires a documented hand-off note. Ownership ends at "Ops accepted" system status only.
+          One named owner per booking. Replacement requires documented hand-off note.
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">05</div>
+          <div class="step-n">2.2</div>
           <div class="step-body">
             <div class="step-title">Full passenger data collection</div>
-            <div class="step-sub">Passport · DOB · PAN · rooming · meals · emergency contact</div>
-            <div class="step-roles"><span class="role-chip rc-b">Booking Owner</span></div>
+            <div class="step-sub">Passport · PAN · rooming · meals · emergency contacts</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">Booking Owner</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
           Per passenger: full name (passport exact) · passport copy + number + expiry · DOB · gender · PAN · mobile &amp; email · emergency contact · rooming type · meal preference · medical / mobility if applicable · special requests in writing.<br><br>
-          Rule: two or more "TBD" fields = incomplete booking, not confirmed.
+          Rule: two or more TBD fields = incomplete booking.
         </div>
       </div>
     </div>
@@ -532,38 +637,49 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <!-- FIT -->
   <div class="swim sw-b">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-b">Booking Owner</div>
-      <span class="swim-roles">FIT Booking Consultant · Finance Executive</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-b">✓ Booking Owner</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR FIT Operations Manager</span>
+        <span class="staff-chip sc-sup">SUP Senior FIT Consultant</span>
+        <span class="staff-chip sc-stf">STF FIT Booking Consultant</span>
+        <span class="staff-chip sc-stf">STF Finance Executive</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">04</div>
+          <div class="step-n">2.1</div>
           <div class="step-body">
             <div class="step-title">FIT deposit &amp; itinerary locked</div>
-            <div class="step-sub">Deposit received · custom itinerary finalised · assigned FIT consultant</div>
-            <div class="step-roles"><span class="role-chip rc-b">FIT Booking Consultant</span><span class="role-chip rc-f">Finance Executive</span></div>
-            <div class="diff-note">FIT — itinerary locked at deposit, not at booking</div>
+            <div class="step-sub">Deposit received · custom itinerary finalised · consultant assigned</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">FIT Booking Consultant</span>
+              <span class="role-chip rc-f">Finance Executive</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <div class="diff-note">FIT — itinerary finalised at deposit</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          For FIT, the custom itinerary must be <strong>finalised and signed off before or at the time of deposit</strong>. No "we'll decide later" on routing, hotels, or dates.<br><br>
-          FIT Booking Consultant owns the file end-to-end. Same 11 duties as group Booking Owner apply — adapted for individual pax. Supplier blocks (hotels, transfers, guides) placed immediately on deposit receipt.
+          Custom itinerary must be <strong>finalised and signed off before or at deposit</strong>. No "decide later" on routing, hotels, or dates. FIT Booking Consultant owns file end-to-end. Supplier blocks placed immediately on deposit receipt.
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">05</div>
+          <div class="step-n">2.2</div>
           <div class="step-body">
-            <div class="step-title">Passenger data + custom preferences</div>
-            <div class="step-sub">Passport · dietary · room type · activity preferences · mobility</div>
-            <div class="step-roles"><span class="role-chip rc-b">FIT Booking Consultant</span></div>
+            <div class="step-title">Passenger data + preferences</div>
+            <div class="step-sub">Passport · dietary · room · activity preferences · mobility</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">FIT Booking Consultant</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          Same mandatory fields as group. FIT additional requirements: <strong>specific hotel preferences</strong> documented and availability confirmed · <strong>activity / guide preferences</strong> recorded · <strong>dietary detail</strong> per meal type (more nuance possible in FIT) · any medical or accessibility needs with supplier capability confirmed.
+          Same 12 mandatory fields plus FIT extras: specific hotel preferences confirmed with availability · activity/guide preferences noted · dietary detail per meal type · medical/accessibility with supplier capability confirmed.
         </div>
       </div>
     </div>
@@ -572,365 +688,385 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <!-- B2B -->
   <div class="swim sw-b">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-b">Booking Owner</div>
-      <span class="swim-roles">B2B Account Manager · Finance Executive</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-b">✓ Booking Owner</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR B2B Operations Manager</span>
+        <span class="staff-chip sc-sup">SUP B2B Account Lead</span>
+        <span class="staff-chip sc-stf">STF B2B Account Manager</span>
+        <span class="staff-chip sc-stf">STF Finance Executive</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">04</div>
+          <div class="step-n">2.1</div>
           <div class="step-body">
             <div class="step-title">B2B booking received from agent</div>
-            <div class="step-sub">Agent submits booking · account manager verifies terms · file opened</div>
-            <div class="step-roles"><span class="role-chip rc-b">B2B Account Manager</span><span class="role-chip rc-f">Finance Executive</span></div>
-            <div class="diff-note">B2B — agent payment terms may differ</div>
+            <div class="step-sub">Agent submits · Account Manager verifies · file opened</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">B2B Account Manager</span>
+              <span class="role-chip rc-f">Finance Executive</span>
+              <span class="staff-chip sc-stf">STF</span>
+              <div class="diff-note">B2B — agent payment terms may differ</div>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          B2B Account Manager verifies: agent account is active and in good standing · credit limit not exceeded · booking falls within agreed product range · commission rate on file · agent has provided end-customer passenger data (not TBD).<br><br>
-          <strong>B2B payment terms:</strong> may operate on net/credit terms per the signed agent agreement. Finance Executive verifies terms before file proceeds. No credit above approved limit without Finance Manager sign-off.
+          Account Manager verifies: agent account active · credit limit not exceeded · booking within agreed product range · commission on file · end-customer passenger data complete (no TBDs).<br><br>
+          B2B Account Lead reviews any booking above credit threshold before acceptance.
         </div>
       </div>
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">05</div>
+          <div class="step-n">2.2</div>
           <div class="step-body">
             <div class="step-title">End-customer data from agent</div>
-            <div class="step-sub">Agent provides all passenger data · Account Manager verifies completeness</div>
-            <div class="step-roles"><span class="role-chip rc-b">B2B Account Manager</span></div>
+            <div class="step-sub">Agent provides all pax data · Account Manager verifies</div>
+            <div class="step-meta">
+              <span class="role-chip rc-b">B2B Account Manager</span>
+              <span class="staff-chip sc-stf">STF</span>
+            </div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          Agent provides full passenger data. B2B Account Manager verifies same 12 mandatory fields. <strong>Agent is responsible</strong> for data accuracy — but Account Manager must flag any incomplete or suspect data back to agent within 24 hours.<br><br>
-          Any "TBD" field is Agent's problem to resolve. Account Manager may not accept a booking with TBD fields from an agent — it reflects poorly on the partner relationship and creates downstream Ops failures.
+          Agent provides all 12 mandatory fields. Account Manager flags any incomplete data back to agent within 24 hours. TBD fields = agent's problem. Account Manager may not accept a booking with TBD fields.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate B -->
+  <!-- Gate B -->
   <div class="shared-gate-wrap">
-    <div class="shared-label">Shared across all booking types</div>
+    <div class="shared-label">Shared — all booking types</div>
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
         <span class="gate-icon">⊘</span>
-        <div class="gate-title">Gate B — Booking confirmation gate · 12 mandatory fields · all booking types</div>
+        <div class="gate-title">Gate B — Booking confirmation gate · 12 mandatory fields</div>
         <span class="gate-badge">HARD STOP</span>
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Booking Owner / FIT Consultant / B2B Account Manager<br>
-        All 12 must be complete: passenger names (passport exact) · passport copy · PAN · departure date · package version · rooming type · payment schedule communicated · visa requirement explained · disclosure signed · cancellation terms shared · discount recorded (if any) · deposit received.<br><br>
-        <strong>Group:</strong> File is "Incomplete" until all pax in the group have complete records.<br>
-        <strong>FIT:</strong> Custom itinerary must also be finalised and signed off.<br>
-        <strong>B2B:</strong> Agent signed agreement must be on file AND end-customer data must be complete.
+        <strong>Owner:</strong> Booking Owner / FIT Consultant / B2B Account Manager (STF), reviewed by Senior Booking Executive (SUP)<br>
+        All 12 fields: passenger names (passport exact) · passport copy · PAN · departure date · package/itinerary version · rooming type · payment schedule communicated · visa explained · disclosure signed · cancellation terms shared · discount recorded · deposit received.<br><br>
+        <strong>FIT:</strong> Custom itinerary also finalised and signed. <strong>B2B:</strong> Agent signed agreement on file AND end-customer data complete.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
-     PHASE 3 — PARALLEL PROCESSING
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEP 3 — PARALLEL PROCESSING
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phase 3</span>
+    <span class="phase-icon">⚡</span>
+    <span class="step-num-pill">Step 3</span>
     <span class="phase-tag">Parallel processing — Visa · Finance · Ticketing</span>
+    <button class="policy-btn" onclick="openPolicy('p3')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
-  <!-- GROUP — Visa -->
+  <!-- Visa — 3 cols -->
   <div class="swim sw-v">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-v">Visa</div>
-      <span class="swim-roles">Visa Officer · Visa Team Lead · Booking Owner (chases)</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-v">🛂 Visa</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Visa Manager</span>
+        <span class="staff-chip sc-sup">SUP Visa Team Lead</span>
+        <span class="staff-chip sc-stf">STF Visa Officer</span>
+        <span class="staff-chip sc-stf">STF Booking Owner (chases)</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">06a</div>
+          <div class="step-n">3.1a</div>
           <div class="step-body">
-            <div class="step-title">Group visa processing — 8 stages</div>
+            <div class="step-title">Group visa — 8 status stages</div>
             <div class="step-sub">Docs → feasibility → appointment → biometrics → decision</div>
-            <div class="step-roles"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-b">Booking Owner (chases)</span></div>
+            <div class="step-meta"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-b">Booking Owner (chases)</span><span class="staff-chip sc-stf">STF</span></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          <strong>8 visa status stages (§08):</strong>
-          <ul>
-            <li><strong>Not started</strong> — Risk. Chase immediately.</li>
-            <li><strong>Documents pending</strong> — Booking incomplete.</li>
-            <li><strong>Documents received</strong> — In preparation.</li>
-            <li><strong>Appointment booked</strong> — Controlled.</li>
-            <li><strong>Biometrics done</strong> — Awaiting decision.</li>
-            <li><strong>Visa received</strong> — Ready ✓</li>
-            <li><strong>Visa rejected</strong> — Retention policy. Escalate.</li>
-            <li><strong>Existing valid visa</strong> — Verify copy on file.</li>
-          </ul>
-          <strong>Late booking rule:</strong> No feasibility confirmed = no Europe booking. Escalate at T-45 if passport not in hand.
+          <strong>8 visa stages:</strong> Not started (Risk) → Documents pending → Documents received → Appointment booked → Biometrics done → <strong>Visa received ✓</strong> → Visa rejected (escalate) → Existing valid visa (verify copy).<br><br>
+          Late booking rule: no feasibility = no Europe booking. Escalate at T-45 if passport not in hand.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FIT — Visa -->
   <div class="swim sw-v">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-v">Visa</div>
-      <span class="swim-roles">Visa Officer · FIT Booking Consultant (monitors)</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-v">🛂 Visa</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Visa Manager</span>
+        <span class="staff-chip sc-sup">SUP Visa Team Lead</span>
+        <span class="staff-chip sc-stf">STF Visa Officer</span>
+        <span class="staff-chip sc-stf">STF FIT Consultant (monitors)</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">06a</div>
+          <div class="step-n">3.1a</div>
           <div class="step-body">
-            <div class="step-title">FIT visa processing</div>
-            <div class="step-sub">Same 8 stages · FIT may have faster timeline due to flexible dates</div>
-            <div class="step-roles"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-b">FIT Consultant (monitors)</span></div>
-            <div class="diff-note">FIT — date flexibility can help appointment scheduling</div>
+            <div class="step-title">FIT visa — same 8 stages</div>
+            <div class="step-sub">Date flexibility may help appointment scheduling</div>
+            <div class="step-meta"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-b">FIT Consultant (monitors)</span><span class="staff-chip sc-stf">STF</span><div class="diff-note">FIT — flexible dates can help</div></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          Same 8 visa stages apply. FIT advantage: if dates are flexible, Visa Officer can plan appointment around best available embassy slot. FIT Consultant must confirm whether date flexibility exists before quoting visa timelines to customer.<br><br>
-          <strong>FIT rule:</strong> If customer has fixed flight dates already booked, treat as group-level urgency regardless of FIT status.
+          FIT advantage: if dates flexible, Visa Officer can plan around best embassy slot. FIT Consultant must confirm whether date flexibility exists before quoting timelines. If customer has fixed flights already booked, treat as group-level urgency.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- B2B — Visa -->
   <div class="swim sw-v">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-v">Visa</div>
-      <span class="swim-roles">Visa Officer · B2B Account Manager (monitors)</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-v">🛂 Visa</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Visa Manager</span>
+        <span class="staff-chip sc-sup">SUP Visa Team Lead</span>
+        <span class="staff-chip sc-stf">STF Visa Officer</span>
+        <span class="staff-chip sc-stf">STF B2B Account Manager (chases agent)</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">06a</div>
+          <div class="step-n">3.1a</div>
           <div class="step-body">
-            <div class="step-title">B2B visa processing</div>
-            <div class="step-sub">Agent-submitted docs · same 8 stages · agent chases their customer</div>
-            <div class="step-roles"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-s">Agent (doc responsibility)</span></div>
-            <div class="diff-note">B2B — agent is responsible for doc collection from end customer</div>
+            <div class="step-title">B2B visa — agent submits docs</div>
+            <div class="step-sub">Agent collects from end customer · submits complete to Visa team</div>
+            <div class="step-meta"><span class="role-chip rc-v">Visa Officer</span><span class="role-chip rc-s">Agent (doc responsibility)</span><span class="staff-chip sc-stf">STF</span><div class="diff-note">B2B — agent is responsible for docs</div></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          For B2B, the <strong>agent is responsible for collecting passport and visa documents</strong> from the end customer and submitting to TripFactory Visa team in complete form.<br><br>
-          TripFactory Visa team does not chase end-customers directly. B2B Account Manager chases the agent. Agent SLA: document submission within 48 hours of request. Delays caused by agent = agent's accountability.
+          <strong>Agent</strong> is responsible for collecting passport and visa documents from end customer and submitting complete to TripFactory Visa team. Visa team does not chase end-customers. Account Manager chases agent. Agent SLA: document submission within 48 hours of request.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate C -->
+  <!-- Gate C -->
   <div class="shared-gate-wrap">
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
         <span class="gate-icon">⊘</span>
-        <div class="gate-title">Gate C — Visa gate · all booking types · visa fee + deposit received before processing begins</div>
+        <div class="gate-title">Gate C — Visa gate · visa fee + deposit received before processing begins</div>
         <span class="gate-badge">HARD STOP</span>
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Visa Officer + Booking Owner / Consultant / Account Manager<br>
-        <strong>Condition:</strong> Visa fee + required package deposit received before visa processing may begin.<br>
-        <strong>No visa feasibility = no Europe booking (§05). Zero exceptions.</strong><br>
-        Escalation at T-45 if passport not in hand. B2B: agent must provide all docs in one complete submission — partial submissions not accepted.
+        <strong>Owner:</strong> Visa Officer (STF) supervised by Visa Team Lead (SUP) and Visa Manager (MGR)<br>
+        Visa fee + required deposit received before processing begins. <strong>No feasibility confirmed = no Europe booking (§05). Zero exceptions.</strong> T-45 escalation if passport not in hand. B2B: complete submission only — no partial docs accepted.
       </div>
     </div>
   </div>
 
-  <!-- Finance row — shared across all 3 -->
+  <!-- Finance — full width -->
   <div class="shared-row">
     <div class="swim sw-f">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-f">Finance</div>
-        <span class="swim-roles">Finance Executive · Finance Manager · Business Head (exceptions) · Booking Owner (closes dues)</span>
+        <div class="swim-dept-row"><div class="swim-dept-tag sd-f">₹ Finance</div></div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Finance Manager</span>
+          <span class="staff-chip sc-mgr">MGR Business Head (exceptions only)</span>
+          <span class="staff-chip sc-sup">SUP Senior Finance Executive</span>
+          <span class="staff-chip sc-stf">STF Finance Executive</span>
+          <span class="staff-chip sc-stf">STF Booking Owner (closes dues)</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">06b</div>
+            <div class="step-n">3.1b</div>
             <div class="step-body">
               <div class="step-title">Payment milestones tracked — 6 gates (all booking types)</div>
-              <div class="step-sub">Booking → Visa → Flight → Supplier → Final · no company action before gate clears</div>
-              <div class="step-roles"><span class="role-chip rc-f">Finance Executive</span><span class="role-chip rc-f">Finance Manager</span><span class="role-chip rc-b">Booking Owner (closes dues)</span></div>
+              <div class="step-sub">Booking → Visa → Flight → Supplier → Final · no action before gate clears</div>
+              <div class="step-meta"><span class="role-chip rc-f">Finance Executive</span><span class="role-chip rc-f">Finance Manager</span><span class="role-chip rc-b">Booking Owner (closes dues)</span><span class="staff-chip sc-stf">STF</span><span class="staff-chip sc-mgr">MGR</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            <strong>6 payment gates apply to all booking types:</strong>
-            <ul>
-              <li><strong>Booking Gate:</strong> Deposit received → file created</li>
-              <li><strong>Visa Gate:</strong> Visa fee + deposit → visa processing begins</li>
-              <li><strong>Flight Gate:</strong> Ticketing deposit → flights may be sealed</li>
-              <li><strong>Supplier Gate:</strong> Minimum collection → supplier commitments protected</li>
-              <li><strong>Final Gate:</strong> 100% package + TCS + supplements → final handover</li>
-              <li><strong>Tour Gate:</strong> Zero dues → vouchers and briefing released</li>
-            </ul>
-            <strong>B2B variation:</strong> Agent credit terms may allow delayed payment to "Booking Gate" milestone — but all subsequent gates require payment per schedule. No credit extension beyond agent agreement terms.
+            <strong>6 payment gates (§06):</strong> Booking Gate → Visa Gate → Flight Gate → Supplier Gate → Final Gate → Tour Gate (zero dues = vouchers released). Finance records receivables. Booking Owner closes dues. Outstanding dues at T-14 → Finance escalates to Booking Owner and Finance Manager.<br><br>
+            <strong>B2B:</strong> Agent credit terms may allow delayed booking gate payment — all subsequent gates per schedule. Finance Manager must confirm terms before file proceeds.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Ticketing row — shared -->
+  <!-- Ticketing — full width -->
   <div class="shared-row">
     <div class="swim sw-t">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-t">Ticketing</div>
-        <span class="swim-roles">Ticketing Executive · Ticketing Manager · Booking Owner (name check)</span>
+        <div class="swim-dept-row"><div class="swim-dept-tag sd-t">✈ Ticketing</div></div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Ticketing Manager</span>
+          <span class="staff-chip sc-stf">STF Ticketing Executive</span>
+          <span class="staff-chip sc-stf">STF Booking Owner (name check)</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">06c</div>
+            <div class="step-n">3.1c</div>
             <div class="step-body">
               <div class="step-title">Flight sealing (all booking types)</div>
               <div class="step-sub">Name match verified · PNR confirmed · ticketing deposit cleared</div>
-              <div class="step-roles"><span class="role-chip rc-t">Ticketing Executive</span><span class="role-chip rc-b">Booking Owner (name check)</span></div>
+              <div class="step-meta"><span class="role-chip rc-t">Ticketing Executive</span><span class="role-chip rc-b">Booking Owner (name check)</span><span class="staff-chip sc-stf">STF</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            Name exactly as passport (verified by Booking Owner) · passport details on PNR · DOB correct · ticketing deposit cleared · "flight may vary" disclosed.<br><br>
-            <strong>Group:</strong> All pax names verified as a batch before sealing any.<br>
-            <strong>FIT:</strong> Customer may request specific airline / class — document it, but do not guarantee it.<br>
-            <strong>B2B:</strong> Agent provides names; Account Manager spot-checks against passport copies on file.
+            Name exactly as passport · passport details on PNR · DOB and gender correct · ticketing deposit cleared · "flight may vary" disclosed.<br><br>
+            <strong>Group:</strong> All pax names verified as a batch. <strong>FIT:</strong> Specific airline/class requests documented — not guaranteed. <strong>B2B:</strong> Account Manager spot-checks agent-submitted names against passport copies.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate D -->
+  <!-- Gate D -->
   <div class="shared-gate-wrap">
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
         <span class="gate-icon">⊘</span>
-        <div class="gate-title">Gate D — Flight gate · ticketing deposit + passport name match · all booking types</div>
+        <div class="gate-title">Gate D — Flight gate · ticketing deposit + exact passport name match</div>
         <span class="gate-badge">HARD STOP</span>
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Ticketing Executive + Booking Owner / Consultant / Account Manager<br>
-        <strong>Condition:</strong> Ticketing deposit cleared AND exact name match to passport verified before any flight is sealed.<br>
-        Name mismatch = booking error. Booking Owner is co-responsible. Escalation if flight not sealed at T-30.
+        <strong>Owner:</strong> Ticketing Executive (STF) + Booking Owner (STF), supervised by Ticketing Manager (MGR)<br>
+        Ticketing deposit cleared AND passport name match verified before any flight sealed. Name mismatch = booking error. Booking Owner co-responsible. Flight not sealed at T-30 → escalation to Ops Manager and management.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
-     PHASE 4 — FINANCIAL CLOSURE + DRIVER INVOICE
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEP 4 — FINANCIAL CLOSURE & DRIVER EXPENSES
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phase 4</span>
-    <span class="phase-tag">Financial closure · supplier payments · driver expense settlement</span>
+    <span class="phase-icon">💶</span>
+    <span class="step-num-pill">Step 4</span>
+    <span class="phase-tag">Financial closure · supplier payments · driver float &amp; expense settlement</span>
+    <button class="policy-btn" onclick="openPolicy('p4')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
+  <!-- Final payment — full width -->
   <div class="shared-row">
     <div class="swim sw-f">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-f">Finance</div>
-        <span class="swim-roles">Finance Manager · Booking Owner · Business Head (exceptions)</span>
+        <div class="swim-dept-row"><div class="swim-dept-tag sd-f">₹ Finance</div></div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Finance Manager</span>
+          <span class="staff-chip sc-mgr">MGR Business Head (exceptions only)</span>
+          <span class="staff-chip sc-stf">STF Finance Executive</span>
+          <span class="staff-chip sc-stf">STF Booking Owner</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">07</div>
+            <div class="step-n">4.1</div>
             <div class="step-body">
               <div class="step-title">Supplier gate cleared · final payment received</div>
               <div class="step-sub">100% package + TCS + supplements · zero dues · supplier commitments protected</div>
-              <div class="step-roles"><span class="role-chip rc-f">Finance Manager</span><span class="role-chip rc-b">Booking Owner</span></div>
+              <div class="step-meta"><span class="role-chip rc-f">Finance Manager</span><span class="role-chip rc-b">Booking Owner</span><span class="staff-chip sc-mgr">MGR</span><span class="staff-chip sc-stf">STF</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            Company shall not make irreversible supplier payments — hotel blocks, coach contracts, guide fees, attraction tickets — before the Supplier Gate clears.<br><br>
-            Finance Manager authorises supplier payment only when minimum collection threshold is met. Exception requires Business Head written approval on file.
+            No irreversible supplier payments — hotel blocks, coach contracts, guide fees, attraction tickets — before Supplier Gate clears. Finance Manager authorises. Exception requires Business Head written approval on file.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- DRIVER INVOICE — full-width new section -->
+  <!-- Driver float — full width -->
   <div class="shared-row">
     <div class="swim sw-d">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-d">Driver / Supplier</div>
-        <span class="swim-roles">Driver · Supplier Representative · Finance Executive · Ops Controller</span>
+        <div class="swim-dept-row"><div class="swim-dept-tag sd-d">🚌 Driver / Supplier</div></div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Finance Manager (approves over-threshold)</span>
+          <span class="staff-chip sc-sup">SUP Ops Controller (verifies expenses)</span>
+          <span class="staff-chip sc-stf">STF Finance Executive (records &amp; settles)</span>
+          <span class="staff-chip sc-stf">STF Driver / Supplier Rep</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">07a</div>
+            <div class="step-n">4.2</div>
             <div class="step-body">
-              <div class="step-title">Driver / supplier float issued</div>
-              <div class="step-sub">Pre-tour float advanced (e.g. €500) · recorded in LERMS · driver signs receipt</div>
-              <div class="step-roles"><span class="role-chip rc-d">Driver</span><span class="role-chip rc-f">Finance Executive</span><span class="role-chip rc-o">Ops Controller</span></div>
+              <div class="step-title">Driver / supplier float issued pre-tour</div>
+              <div class="step-sub">Float advanced (e.g. €500) · recorded in LERMS · driver signs receipt</div>
+              <div class="step-meta"><span class="role-chip rc-d">Driver</span><span class="role-chip rc-f">Finance Executive</span><span class="role-chip rc-o">Ops Controller</span><span class="staff-chip sc-stf">STF</span><span class="staff-chip sc-sup">SUP</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            Before departure, Ops Controller approves a pre-tour float to the driver / supplier (typically €300–€500 or as agreed per tour type). Finance Executive records the float in LERMS against the specific tour code and departure date.<br><br>
             <strong>Float issue process:</strong>
             <ul>
-              <li>Ops Controller submits float request with tour code, driver name, amount, justification</li>
-              <li>Finance Manager approves amounts above standard float threshold</li>
+              <li>Ops Controller (SUP) submits float request: tour code, driver name, amount, justification</li>
+              <li>Finance Manager (MGR) approves amounts above standard float threshold</li>
               <li>Driver signs float receipt — amount, date, tour code, return-by date</li>
-              <li>Float recorded in LERMS as "Advanced to Supplier — [Tour Code] — [Driver Name]"</li>
+              <li>Finance Executive (STF) records in LERMS: "Advanced to Supplier — [Tour Code] — [Driver Name]"</li>
               <li>Zero float advances without Ops Controller authorisation</li>
             </ul>
+            Typical float: €300–€500 depending on tour type and route. Multi-day tours may have higher float — Finance Manager approval required above standard limit.
           </div>
         </div>
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">07b</div>
+            <div class="step-n">4.3</div>
             <div class="step-body">
               <div class="step-title">Driver submits expense invoice post-tour</div>
-              <div class="step-sub">Receipts + invoice submitted within 48 hrs of tour end · verified against float</div>
-              <div class="step-roles"><span class="role-chip rc-d">Driver</span><span class="role-chip rc-o">Ops Controller (verifies)</span><span class="role-chip rc-f">Finance Executive (settles)</span></div>
+              <div class="step-sub">Receipts + invoice within 48 hrs · verified against float · LERMS closed</div>
+              <div class="step-meta"><span class="role-chip rc-d">Driver</span><span class="role-chip rc-o">Ops Controller (verifies)</span><span class="role-chip rc-f">Finance Executive (settles)</span><span class="staff-chip sc-stf">STF</span><span class="staff-chip sc-sup">SUP</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            <strong>Driver expense submission rules:</strong>
+            <strong>Driver submits within 48 hours of tour end:</strong>
             <ul>
-              <li>All receipts must be original (or clear photos) — no receipt = expense not approved</li>
-              <li>Expenses must be submitted within <strong>48 hours of tour end</strong></li>
-              <li>Expense categories: parking · road tolls (above agreed daily cap) · fuel top-up (if applicable) · emergency repairs (pre-approved by Ops) · ferry/tunnel (if not in contract)</li>
-              <li>Personal expenses (meals, accommodation where included) are <strong>not</strong> reimbursable via the float</li>
+              <li>Itemised expense invoice</li>
+              <li>Original receipts (or clear photos) — no receipt = expense rejected</li>
+              <li>Signed LERMS return form</li>
             </ul>
-            <strong>Invoice settlement flow:</strong>
+            <strong>Approved expense categories:</strong> Parking · road tolls above agreed daily cap · fuel top-up if applicable · pre-approved emergency repairs · ferry/tunnel if not in contract.<br>
+            <strong>Not reimbursable:</strong> Meals/accommodation where included · personal expenses · anything without a receipt.<br><br>
+            <strong>Settlement flow:</strong>
             <ul>
-              <li>Driver submits: expense invoice + receipts + signed LERMS return form</li>
-              <li>Ops Controller verifies: expenses against approved categories · receipts match amounts · tour dates correct</li>
-              <li>Finance Executive reconciles: actual expenses vs float advanced</li>
-              <li><strong>If actual &lt; float:</strong> Driver returns balance. Ops Controller records surplus return in LERMS.</li>
-              <li><strong>If actual &gt; float:</strong> Ops Controller approves overage (within 10% buffer) → Finance pays difference. Over 10% requires Finance Manager sign-off.</li>
-              <li><strong>Missing receipts:</strong> Expense rejected for that line. Driver cannot claim without receipt.</li>
+              <li>Ops Controller (SUP) verifies: categories match approved list · receipts match amounts · tour dates correct</li>
+              <li>Finance Executive (STF) reconciles: actual vs float advanced</li>
+              <li><strong>Under float:</strong> Driver returns balance. Ops Controller records in LERMS.</li>
+              <li><strong>Over float (within 10%):</strong> Ops Controller approves → Finance pays difference</li>
+              <li><strong>Over float (above 10%):</strong> Finance Manager (MGR) sign-off required</li>
+              <li><strong>Missing receipts:</strong> That line item rejected — no exceptions</li>
             </ul>
-            <strong>LERMS close-out:</strong> Finance Executive marks float as "Settled" with date and actual vs advanced summary. Any disputed items escalated to Ops Manager → Finance Manager within 5 working days.
+            Finance Executive marks float "Settled" in LERMS with actual vs advanced summary. Disputes escalated to Ops Manager → Finance Manager within 5 working days.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate E -->
+  <!-- Gate E -->
   <div class="shared-gate-wrap">
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
@@ -940,179 +1076,192 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Finance Manager + Booking Owner / Consultant / Account Manager<br>
-        <strong>Condition:</strong> 100% package + TCS + supplements + add-ons received. Dues = zero.<br>
-        <strong>Exception:</strong> Finance Manager + Business Head written approval only.<br>
-        <strong>Consequence:</strong> Vouchers released with outstanding dues = non-negotiable violation (§26). Scorecard entry.<br><br>
-        <strong>B2B exception:</strong> Agent credit terms may allow net settlement post-tour — but agent must be within credit limit and terms must be in the signed agreement. Finance Manager must confirm before file proceeds.
+        <strong>Owner:</strong> Finance Executive (STF), approved by Finance Manager (MGR), exception requires Business Head (MGR)<br>
+        100% package + TCS + supplements + add-ons = zero dues. Exception: Finance Manager + Business Head written approval only.<br>
+        Vouchers released with outstanding dues = §26 violation. Booking Owner scorecard entry (§25).<br>
+        <strong>B2B exception:</strong> Agent credit terms may allow net settlement post-tour — must be within credit limit and in signed agreement. Finance Manager confirms before file proceeds.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
-     PHASE 5 — GROUP STRENGTH & FREEZE
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEP 5 — GROUP STRENGTH & FREEZE
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phase 5</span>
-    <span class="phase-tag">Group strength &amp; departure freeze</span>
+    <span class="phase-icon">👥</span>
+    <span class="step-num-pill">Step 5</span>
+    <span class="phase-tag">Group strength · departure freeze · service confirmation</span>
+    <button class="policy-btn" onclick="openPolicy('p5')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
-  <!-- GROUP -->
   <div class="swim sw-o">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-o">Operations</div>
-      <span class="swim-roles">Ops Manager · Sales Head · Management</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-o">⚙ Operations</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Ops Manager + Sales Head (decision)</span>
+        <span class="staff-chip sc-mgr">MGR Management (merge / cancel)</span>
+        <span class="staff-chip sc-stf">STF Sales Expert (communicates to pax)</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">08</div>
+          <div class="step-n">5.1</div>
           <div class="step-body">
             <div class="step-title">Group strength review</div>
             <div class="step-sub">Threshold assessed · proceed / hold / merge / cancel</div>
-            <div class="step-roles"><span class="role-chip rc-o">Ops Manager</span><span class="role-chip rc-s">Sales Head</span></div>
+            <div class="step-meta"><span class="role-chip rc-o">Ops Manager</span><span class="role-chip rc-s">Sales Head</span><span class="staff-chip sc-mgr">MGR</span></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          §18: Decision options — Proceed · Hold (extend window, risk accepted) · Merge with nearest departure (management sign-off) · Cancel (full refund, management sign-off). Sales Expert communicates decision to all affected passengers in writing immediately.
+          §18 decision: Proceed · Hold (extend window, risk accepted in writing) · Merge with nearest departure (management sign-off) · Cancel with full refund (management sign-off). Sales Expert communicates decision to all affected passengers in writing immediately.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FIT -->
   <div class="swim sw-o">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-o">Operations</div>
-      <span class="swim-roles">Ops Controller · FIT Booking Consultant</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-o">⚙ Operations</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-sup">SUP Ops Controller</span>
+        <span class="staff-chip sc-stf">STF FIT Booking Consultant</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">08</div>
+          <div class="step-n">5.1</div>
           <div class="step-body">
             <div class="step-title">FIT service confirmation</div>
             <div class="step-sub">Individual services confirmed · no group strength issue</div>
-            <div class="step-roles"><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-b">FIT Consultant</span></div>
-            <div class="diff-note">FIT — no group strength gate; individual service blocks confirmed</div>
+            <div class="step-meta"><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-b">FIT Consultant</span><span class="staff-chip sc-sup">SUP</span><span class="staff-chip sc-stf">STF</span><div class="diff-note">FIT — service confirmation replaces strength gate</div></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          FIT does not have a group strength gate. Instead, Ops Controller confirms each individual service block is secured: hotel rooms confirmed · private transfer booked · guide assigned · restaurant reservations made · attraction tickets purchased.<br><br>
-          Any service not confirmed at T-21 triggers escalation to FIT Consultant to resolve or offer customer alternative.
+          Ops Controller confirms each individual service block is secured: hotel rooms confirmed · private transfer booked · guide assigned · restaurant reservations made · attraction tickets purchased. Any unconfirmed service at T-21 → escalation to FIT Consultant.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- B2B -->
   <div class="swim sw-o">
     <div class="swim-label">
-      <div class="swim-dept-tag sd-o">Operations</div>
-      <span class="swim-roles">Ops Manager · B2B Account Manager</span>
+      <div class="swim-dept-row"><div class="swim-dept-tag sd-o">⚙ Operations</div></div>
+      <div class="staff-levels">
+        <span class="staff-chip sc-mgr">MGR Ops Manager</span>
+        <span class="staff-chip sc-stf">STF B2B Account Manager</span>
+      </div>
     </div>
     <div class="swim-content">
       <div class="step" onclick="tog(this)">
         <div class="step-hd">
-          <div class="step-num">08</div>
+          <div class="step-n">5.1</div>
           <div class="step-body">
             <div class="step-title">B2B volume confirmation</div>
-            <div class="step-sub">Agent pax count confirmed · group or individual services blocked</div>
-            <div class="step-roles"><span class="role-chip rc-o">Ops Manager</span><span class="role-chip rc-b">B2B Account Manager</span></div>
-            <div class="diff-note">B2B — agent may submit group or individual bookings</div>
+            <div class="step-sub">Agent final pax count confirmed · services blocked</div>
+            <div class="step-meta"><span class="role-chip rc-o">Ops Manager</span><span class="role-chip rc-b">B2B Account Manager</span><span class="staff-chip sc-mgr">MGR</span><span class="staff-chip sc-stf">STF</span><div class="diff-note">B2B — group or FIT services depending on booking</div></div>
           </div>
           <div class="step-toggle">›</div>
         </div>
         <div class="step-detail">
-          B2B bookings may be for group departures (agent blocks seats on a group tour) or individual FIT-style bookings (agent submits on behalf of their client). Ops Manager applies the relevant strength gate or service confirmation process accordingly.<br><br>
-          Agent must confirm final pax count by the agreed freeze deadline. Seats released after freeze deadline without payment are subject to cancellation charges.
+          Agent confirms final pax count by freeze deadline. Ops Manager applies relevant strength gate or service confirmation process. Seats released after freeze without payment = cancellation charges per agreement.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate F -->
+  <!-- Gate F -->
   <div class="shared-gate-wrap">
     <div class="gate warn" onclick="togGate(this)">
       <div class="gate-hd">
         <span class="gate-icon">△</span>
-        <div class="gate-title">Gate F — Freeze gate · group departures · warning / escalation</div>
+        <div class="gate-title">Gate F — Freeze gate · group strength / service confirmation deadline</div>
         <span class="gate-badge">WARNING</span>
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Ops Manager + Sales Head + Management<br>
-        <strong>Group:</strong> Trigger if below minimum strength at freeze deadline. Options: proceed / hold / merge / cancel — management sign-off required.<br>
-        <strong>FIT:</strong> Gate F = service confirmation deadline. Any unconfirmed service at T-21 triggers escalation.<br>
-        <strong>B2B:</strong> Agent pax count must be final by freeze deadline. No extensions without Ops Manager approval.
+        <strong>Owner:</strong> Ops Manager (MGR) + Sales Head (MGR) + Management<br>
+        <strong>Group:</strong> Below minimum at freeze → proceed / hold / merge / cancel — management sign-off. Once frozen: no new bookings, no changes without Ops written approval.<br>
+        <strong>FIT:</strong> Service confirmation deadline at T-21. Unconfirmed service = escalation.<br>
+        <strong>B2B:</strong> Agent pax count final by freeze deadline. No extensions without Ops Manager approval.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
-     PHASES 6 & 7 — HANDOVER & DEPARTURE
-     ════════════════════════════ -->
+<!-- ════════════════════════════════════════════════════
+     STEPS 6 & 7 — HANDOVER & DEPARTURE
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Phases 6 &amp; 7</span>
+    <span class="phase-icon">🤝</span>
+    <span class="step-num-pill">Steps 6 &amp; 7</span>
     <span class="phase-tag">Handover to Operations · pre-departure · departure</span>
+    <button class="policy-btn" onclick="openPolicy('p6')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
   <div class="shared-row">
     <div class="swim sw-x">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-b" style="margin-bottom:4px">Booking Owner</div>
-        <div class="swim-dept-tag sd-o">Operations</div>
-        <span class="swim-roles" style="margin-top:4px">Booking Owner / FIT Consultant / B2B Account Manager · Ops Controller · Ops Manager · Tour Manager</span>
+        <div class="swim-dept-row">
+          <div class="swim-dept-tag sd-b">✓ Booking Owner</div>
+          <div class="swim-dept-tag sd-o" style="margin-left:4px">⚙ Operations</div>
+        </div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Ops Manager (acceptance sign-off)</span>
+          <span class="staff-chip sc-sup">SUP Ops Controller (reviews file)</span>
+          <span class="staff-chip sc-stf">STF Booking Owner / FIT Consultant / B2B Account Manager</span>
+          <span class="staff-chip sc-stf">STF Tour Manager (receives file)</span>
+          <span class="staff-chip sc-stf">STF Driver (float confirmed)</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">09</div>
+            <div class="step-n">6.1</div>
             <div class="step-body">
               <div class="step-title">Sales-to-Operations handover</div>
               <div class="step-sub">Complete file transferred · Ops formally accepts · Sales accountability ends</div>
-              <div class="step-roles"><span class="role-chip rc-b">Booking Owner</span><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-o">Ops Manager (sign-off)</span></div>
+              <div class="step-meta"><span class="role-chip rc-b">Booking Owner</span><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-o">Ops Manager (sign-off)</span><span class="staff-chip sc-stf">STF</span><span class="staff-chip sc-sup">SUP</span><span class="staff-chip sc-mgr">MGR</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
-            <strong>Handover file must include (§21):</strong> Final passenger list with passport details · visa copies per pax · flight tickets + PNRs · final itinerary · hotel vouchers · activity / attraction vouchers · transfer / coach vouchers · restaurant confirmations · travel insurance · Tour Manager info · emergency contacts (all pax) · rooming list (final) · meal + dietary list · medical / mobility notes · special requests with written approval · payment status = zero dues (or written exception) · ground reality acknowledgements dated per pax.<br><br>
+            <strong>Handover file must include (§21):</strong> Final pax list with passports · visa copies per pax · flight tickets + PNRs · final itinerary · hotel vouchers · activity/attraction vouchers · transfer/coach vouchers · restaurant confirmations · travel insurance · TM info · emergency contacts (all pax) · rooming list (final) · meal + dietary list · medical/mobility notes · special requests with approval · payment status zero dues · disclosure acknowledgements dated per pax.<br><br>
             <strong>FIT additions:</strong> Custom itinerary signed by customer · individual service confirmations from each supplier · guide assignment letter.<br>
-            <strong>B2B additions:</strong> Agent booking reference · agent contact for on-road queries · agent-specific billing summary.<br><br>
-            Ops may reject any incomplete file. Sales accountability does not transfer until Ops formally accepts.
+            <strong>B2B additions:</strong> Agent booking reference · agent contact for on-road queries · agent billing summary.
           </div>
         </div>
         <div class="step" onclick="tog(this)">
           <div class="step-hd">
-            <div class="step-num">10–11</div>
+            <div class="step-n">7.1</div>
             <div class="step-body">
-              <div class="step-title">Voucher release · TM file handover · pre-travel briefing</div>
-              <div class="step-sub">Gate E confirmed · vouchers out · TM briefed · LERMS loaded · driver float issued</div>
-              <div class="step-roles"><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-o">Tour Manager</span><span class="role-chip rc-d">Driver (float confirmed)</span></div>
+              <div class="step-title">Vouchers · TM briefing · driver float confirmed</div>
+              <div class="step-sub">Gate E confirmed · vouchers out · TM briefed · LERMS loaded · driver signs float</div>
+              <div class="step-meta"><span class="role-chip rc-o">Ops Controller</span><span class="role-chip rc-o">Tour Manager</span><span class="role-chip rc-d">Driver (float sign-off)</span><span class="staff-chip sc-sup">SUP</span><span class="staff-chip sc-stf">STF</span></div>
             </div>
             <div class="step-toggle">›</div>
           </div>
           <div class="step-detail">
             Vouchers released only after Gate E confirmed. Pre-travel briefing repeats ground reality disclosure — last line of defence against on-road complaints.<br><br>
-            Tour Manager receives: passenger list · rooming plan · meal list · flight manifests · hotel confirmations · supplier vouchers · LERMS cash load · approved optionals · emergency contacts · special requests.<br><br>
-            <strong>Driver:</strong> Float confirmed in LERMS, signed by driver. Float amount, approved expense categories, and return procedure communicated before departure day.
+            TM receives: pax list · rooming plan · meal list · flight manifests · hotel confirmations · supplier vouchers · LERMS cash load · approved optionals · emergency contacts · special requests.<br><br>
+            <strong>Driver:</strong> Float confirmed in LERMS, signed by driver before departure day. Float amount, approved categories, return procedure all communicated.
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Shared Gate G -->
+  <!-- Gate G -->
   <div class="shared-gate-wrap">
     <div class="gate stop" onclick="togGate(this)">
       <div class="gate-hd">
@@ -1122,14 +1271,14 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>Owner:</strong> Ops Controller / Ops Manager<br>
-        Ops may reject if: any mandatory field missing · disclosure not on file · rooming not finalised · outstanding dues (without written exception) · visa unresolved · PNR not confirmed · special request not approved in writing · medical needs not documented.<br><br>
+        <strong>Owner:</strong> Ops Controller (SUP) reviews, Ops Manager (MGR) signs acceptance<br>
+        Ops may reject if: any mandatory field missing · disclosure not on file · rooming not final · outstanding dues (without written exception) · visa unresolved · PNR not confirmed · special request not approved · medical needs undocumented.<br>
         <strong>Rejected handover = Sales / Booking Owner failure.</strong> Accountability does not transfer until Ops formally accepts.
       </div>
     </div>
   </div>
 
-  <!-- Departure cleared gate -->
+  <!-- Departure cleared -->
   <div class="shared-gate-wrap">
     <div class="gate pass" onclick="togGate(this)">
       <div class="gate-hd">
@@ -1139,64 +1288,55 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
         <span class="gate-chev">›</span>
       </div>
       <div class="gate-body">
-        <strong>All 7 gates confirmed:</strong> A (disclosure) · B (booking fields) · C (visa) · D (flights) · E (zero dues) · F (freeze / service confirmation) · G (handover accepted)<br><br>
-        File status: Operationally Ready · Zero dues · Visa confirmed · PNRs sealed · Rooming final · TM briefed · LERMS loaded · Driver float issued &amp; signed.<br><br>
+        <strong>All 7 gates confirmed:</strong> A (disclosure) · B (booking fields) · C (visa) · D (flights) · E (zero dues) · F (freeze / service confirmation) · G (handover accepted)<br>
+        File: Operationally Ready · Zero dues · Visa confirmed · PNRs sealed · Rooming final · TM briefed · LERMS loaded · Driver float issued &amp; signed.<br><br>
         <strong>Policy litmus test:</strong> No preventable booking error becomes an on-road crisis.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════
+<!-- ════════════════════════════════════════════════════
      ACCOUNTABILITY
-     ════════════════════════════ -->
+     ════════════════════════════════════════════════════ -->
 <div class="col-grid">
   <div class="phase-hdr">
     <div class="phase-hdr-line"></div>
-    <span class="phase-num">Reference</span>
+    <span class="phase-icon">📊</span>
+    <span class="step-num-pill">Reference</span>
     <span class="phase-tag">Accountability · escalation · scorecard · violations</span>
+    <button class="policy-btn" onclick="openPolicy('pref')">§ Policy</button>
     <div class="phase-hdr-line"></div>
   </div>
 
   <div class="shared-row">
     <div class="swim sw-x">
       <div class="swim-label">
-        <div class="swim-dept-tag sd-o">Ops &amp; Sales Control</div>
-        <span class="swim-roles">Ops &amp; Sales Control Desk · Management · Business Head</span>
+        <div class="swim-dept-row"><div class="swim-dept-tag sd-o">⚙ Ops &amp; Sales Control</div></div>
+        <div class="staff-levels">
+          <span class="staff-chip sc-mgr">MGR Business Head (Level 3)</span>
+          <span class="staff-chip sc-mgr">MGR Management (Level 2)</span>
+          <span class="staff-chip sc-sup">SUP Ops &amp; Sales Control Desk (Level 1)</span>
+        </div>
       </div>
       <div class="swim-content">
         <div class="gate warn" onclick="togGate(this)">
-          <div class="gate-hd">
-            <span class="gate-icon">△</span>
-            <div class="gate-title">Escalation process — §24 · 3 levels · all booking types</div>
-            <span class="gate-badge">ESCALATION</span>
-            <span class="gate-chev">›</span>
-          </div>
+          <div class="gate-hd"><span class="gate-icon">△</span><div class="gate-title">Escalation — §24 · 3 levels · all booking types</div><span class="gate-badge">ESCALATION</span><span class="gate-chev">›</span></div>
           <div class="gate-body">
-            <strong>Level 1:</strong> Booking Owner / Consultant / Account Manager → Ops &amp; Sales Control Desk · 24-hour window<br>
-            <strong>Level 2:</strong> Ops &amp; Sales Control → Management · 4-hour escalation if unresolved<br>
-            <strong>Level 3:</strong> Management decision — final, documented on file<br><br>
+            <strong>Level 1 (SUP):</strong> Booking Owner / Consultant / Account Manager → Ops &amp; Sales Control Desk · 24-hour window<br>
+            <strong>Level 2 (MGR):</strong> Control Desk → Management · 4-hour escalation if unresolved<br>
+            <strong>Level 3 (MGR):</strong> Business Head decision — final, documented on file<br><br>
             <strong>Common triggers:</strong> Passport not in hand T-45 · Flight not sealed T-30 · Outstanding dues T-14 · Visa rejection · Dirty file at handover · Driver float not settled within 48hrs of tour end · Agent missing document submission
           </div>
         </div>
         <div class="gate warn" onclick="togGate(this)">
-          <div class="gate-hd">
-            <span class="gate-icon">📊</span>
-            <div class="gate-title">Booking Owner scorecard — §25 · seasonal review · all booking types</div>
-            <span class="gate-badge">SEASONAL</span>
-            <span class="gate-chev">›</span>
-          </div>
+          <div class="gate-hd"><span class="gate-icon">📊</span><div class="gate-title">Booking Owner scorecard — §25 · seasonal review</div><span class="gate-badge">SEASONAL</span><span class="gate-chev">›</span></div>
           <div class="gate-body">
-            Tracks per Booking Owner / FIT Consultant / B2B Account Manager: booking errors (type + frequency) · late payment collections · dirty handovers to Ops · customer complaints attributable to booking stage · escalations generated · gate violations (A–G) · driver float disputes attributable to booking stage · B2B: agent credit incidents. Persistent violations → managed performance review.
+            Tracks per Booking Owner / FIT Consultant / B2B Account Manager: booking errors (type + frequency) · late payment collections · dirty handovers · customer complaints attributable to booking stage · escalations generated · gate violations (A–G) · driver float disputes attributable to booking · B2B: agent credit incidents. Persistent violations → managed performance review by Ops Manager and HR.
           </div>
         </div>
         <div class="gate stop" onclick="togGate(this)">
-          <div class="gate-hd">
-            <span class="gate-icon">⊘</span>
-            <div class="gate-title">Non-negotiable violations — §26 · zero tolerance</div>
-            <span class="gate-badge">ZERO TOLERANCE</span>
-            <span class="gate-chev">›</span>
-          </div>
+          <div class="gate-hd"><span class="gate-icon">⊘</span><div class="gate-title">Non-negotiable violations — §26 · zero tolerance</div><span class="gate-badge">ZERO TOLERANCE</span><span class="gate-chev">›</span></div>
           <div class="gate-body">
             <ul>
               <li>Unrecorded discount or special price given to customer</li>
@@ -1219,13 +1359,9 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   </div>
 </div>
 
-<!-- ─── Final rule ─────────────────────────────── -->
 <div class="rule-bar">
   <p>The rule from which everything else in this policy descends</p>
-  <strong>
-    <span>Sell clean</span> · <span>Book clean</span> · <span>Collect on time</span> ·
-    <span>Freeze early</span> · <span>Handover complete</span> · <span>Operate without surprises</span>
-  </strong>
+  <strong><span>Sell clean</span> · <span>Book clean</span> · <span>Collect on time</span> · <span>Freeze early</span> · <span>Handover complete</span> · <span>Operate without surprises</span></strong>
 </div>
 <div class="rule-stripe"></div>
 
@@ -1234,27 +1370,121 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <span>Group · FIT · B2B · Ops &amp; Sales Control Desk</span>
 </footer>
 
-</div><!-- /outer -->
+</div>
+
+<!-- ── POLICY POPUP OVERLAY ── -->
+<div class="policy-overlay" id="policyOverlay" onclick="closePolicy()"></div>
+<div class="policy-popup" id="policyPopup">
+  <div class="policy-popup-hdr">
+    <span class="policy-popup-icon" id="policyIcon">📋</span>
+    <span class="policy-popup-title" id="policyTitle">Policy Extract</span>
+    <button class="policy-popup-close" onclick="closePolicy()">×</button>
+  </div>
+  <div class="policy-popup-body" id="policyBody"></div>
+</div>
+
 <script>
-function tog(card){
-  var d=card.querySelector('.step-detail');
-  var c=card.querySelector('.step-toggle');
-  if(!d)return;
-  var o=d.classList.toggle('show');
-  if(c)c.classList.toggle('open',o);
+var POLICIES = {
+  p1: {
+    icon:'📋', title:'§01–§05 · Enquiry, Disclosure & Price Discipline',
+    body:`<strong>§01 Purpose:</strong> This policy exists to eliminate preventable booking errors that become on-road crises. Every gate is a checkpoint that protects the customer, the Tour Manager, and the company.<br><br>
+<strong>§02 Scope:</strong> Applies to all sales and booking staff across Group, FIT, and B2B booking types.<br><br>
+<strong>§03 Booking Owner:</strong> Every booking must have one named Booking Owner. That person is responsible for the accuracy and completeness of the file from deposit to "Ops accepted" status. Ownership does not transfer without a documented hand-off note.<br><br>
+<strong>§04 First contact:</strong> An enquiry is not a booking. Sales Expert logs interest only. No system entry, no inventory block, no commitment until Gate A is cleared.<br><br>
+<strong>§05 Disclosure:</strong> All 14 ground reality items must be disclosed and signed before any payment is accepted. No exceptions. Sales Expert failure to disclose = Sales-side failure that cannot be passed to Ops or Tour Manager.<br><br>
+<strong>§07 Price discipline:</strong> No recorded discount = no discount. No written inclusion = no commitment. Branch Manager must approve and record all price deviations.`
+  },
+  p2: {
+    icon:'✅', title:'§03–§04 · Booking Confirmation & Mandatory Fields',
+    body:`<strong>§03 Booking Owner duties (11 areas):</strong> Booking accuracy · customer data · visa readiness · payments · flight sealing · rooming · meals · special requests · optionals · customer expectation · handover.<br><br>
+<strong>§04 Data collection:</strong> All 12 mandatory fields must be complete before a file is "Confirmed". Fields include: passenger names (passport exact) · passport copy · PAN · departure date · package version · rooming type · payment schedule communicated · visa requirement explained · disclosure signed · cancellation terms shared · discount recorded · deposit received.<br><br>
+<strong>§04 Incomplete booking rule:</strong> Two or more TBD fields = "Incomplete Booking" status, not "Confirmed". Payment alone does not confirm a booking. Verbal assurance never confirms a booking.<br><br>
+<strong>§14 B2B:</strong> Agent must have a signed agreement on file before any booking is created. Agent commission must be documented. Agent is responsible for end-customer disclosure.`
+  },
+  p3: {
+    icon:'⚡', title:'§05–§09 · Visa, Finance & Ticketing Gates',
+    body:`<strong>§05 Visa — hard rule:</strong> No visa feasibility confirmed = no Europe booking. Zero exceptions.<br><br>
+<strong>§08 Visa stages:</strong> Not started (Risk) · Documents pending · Documents received · Appointment booked · Biometrics done · Visa received ✓ · Visa rejected (retention policy applies) · Existing valid visa (verify copy).<br><br>
+<strong>§08 Escalation:</strong> Passport not in hand at T-45 → Booking Owner escalates to management immediately.<br><br>
+<strong>§06 Payment gates:</strong> Six sequential payment gates must be cleared before corresponding actions. No company action — supplier payments, flight sealing, voucher release — before its gate is cleared.<br><br>
+<strong>§09 Flight sealing:</strong> Name must exactly match passport. Booking Owner is co-responsible for name verification. Flight not sealed by T-30 = escalation. Sales may not promise: specific airline, direct flight, seat number, excess baggage, meal guarantee, free name correction.`
+  },
+  p4: {
+    icon:'💶', title:'§06 · Payment Gates, Supplier & Driver Float Policy',
+    body:`<strong>§06 Supplier gate:</strong> No irreversible supplier payments before minimum collection threshold is met. Finance Manager authorises. Business Head approval required for any exception.<br><br>
+<strong>§06 Final gate:</strong> 100% package + TCS + supplements = zero dues before final handover. Vouchers released with outstanding dues = §26 violation.<br><br>
+<strong>Driver float policy:</strong> Pre-tour float issued and recorded in LERMS before departure. Driver signs float receipt. Ops Controller authorises all floats. Finance Manager approves above-threshold amounts.<br><br>
+<strong>Expense submission:</strong> Driver submits itemised invoice + original receipts + signed LERMS return form within 48 hours of tour end. Approved categories: parking · tolls above cap · fuel · pre-approved repairs · ferry/tunnel not in contract.<br><br>
+<strong>Settlement:</strong> Ops Controller verifies against approved categories. Finance Executive reconciles actual vs float. Over-float within 10% = Ops Controller approves. Over 10% = Finance Manager sign-off. Missing receipt = line item rejected.`
+  },
+  p5: {
+    icon:'👥', title:'§18 & §20 · Group Strength, Freeze & Service Confirmation',
+    body:`<strong>§18 Group strength:</strong> Decision required at freeze deadline: Proceed · Hold (risk accepted in writing) · Merge (management sign-off) · Cancel (management sign-off, full refund process). Sales Expert communicates decision to all passengers in writing immediately.<br><br>
+<strong>§20 Operational freeze:</strong> Once a departure is frozen, no new bookings, no passenger changes without Ops written approval. Rooming, dietary, optionals and special requests are finalised. Any subsequent change = formal change-control process (§17) with written approval from Ops Manager.<br><br>
+<strong>FIT service confirmation:</strong> Ops Controller confirms each individual service block secured by T-21. Hotel rooms · private transfers · guides · restaurants · attraction tickets. Unconfirmed service at T-21 = escalation to FIT Consultant.<br><br>
+<strong>B2B volume confirmation:</strong> Agent must confirm final pax count by freeze deadline. Seats released after freeze without payment = cancellation charges per agent agreement.`
+  },
+  p6: {
+    icon:'🤝', title:'§21 & §22 · Handover, Vouchers & TM Briefing',
+    body:`<strong>§21 Handover file (18 items must be complete):</strong> Final pax list with passports · visa copies per pax · flight tickets + PNRs · final itinerary · hotel vouchers · activity vouchers · transfer/coach vouchers · restaurant confirmations · travel insurance · TM info · emergency contacts (all pax) · rooming list (final, no TBDs) · meal + dietary list · medical/mobility notes · special requests with approval status · payment status = zero dues (or written exception) · disclosure acknowledgements dated per pax.<br><br>
+<strong>§21 Rejection right:</strong> Operations may reject any incomplete handover file. Booking Owner remains accountable until Ops formally accepts. Rejected handover = Sales failure.<br><br>
+<strong>§22 Voucher release:</strong> Vouchers may not be released until Gate E (zero dues) is confirmed. Pre-travel briefing repeats ground reality disclosure — the last line of defence against on-road complaints.<br><br>
+<strong>TM briefing:</strong> Tour Manager receives same file as Ops handover plus LERMS cash load, approved optionals with supplier contacts, emergency escalation contacts, and TM authority briefing (§10 TM Policy).`
+  },
+  pref: {
+    icon:'📊', title:'§24 & §26 · Escalation, Scorecard & Zero Tolerance Violations',
+    body:`<strong>§24 Escalation (3 levels):</strong><br>
+Level 1 (SUP): Booking Owner → Ops &amp; Sales Control Desk · 24-hour resolution window<br>
+Level 2 (MGR): Control Desk → Management · 4-hour escalation if unresolved<br>
+Level 3 (MGR): Business Head decision — final, documented on file<br><br>
+<strong>§25 Booking Owner Scorecard:</strong> Reviewed each season. Tracks: booking errors · late collections · dirty handovers · customer complaints attributable to booking stage · escalations generated · gate violations (A–G) · driver float disputes · B2B credit incidents.<br><br>
+<strong>§26 Non-negotiable violations (zero tolerance):</strong><br>
+Unrecorded discount · verbal inclusion not in writing · booking confirmed without payment · dirty file to Ops · ownership transferred without hand-off note · agent booking without signed terms · no visa feasibility for late Europe booking · vouchers with outstanding dues · special request guaranteed without approval · no disclosure before deposit · driver float without LERMS entry · driver expense reimbursed without receipt.`
+  }
+};
+
+function openPolicy(id) {
+  var p = POLICIES[id];
+  if (!p) return;
+  document.getElementById('policyIcon').textContent = p.icon;
+  document.getElementById('policyTitle').textContent = p.title;
+  document.getElementById('policyBody').innerHTML = p.body;
+  document.getElementById('policyPopup').classList.add('show');
+  document.getElementById('policyOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
-function togGate(el){
-  var b=el.querySelector('.gate-body');
-  var c=el.querySelector('.gate-chev');
-  if(!b)return;
-  var o=b.classList.toggle('show');
-  if(c)c.classList.toggle('open',o);
+
+function closePolicy() {
+  document.getElementById('policyPopup').classList.remove('show');
+  document.getElementById('policyOverlay').classList.remove('show');
+  document.body.style.overflow = '';
 }
-document.querySelectorAll('.step,.gate').forEach(function(el){
-  el.setAttribute('role','button');
-  el.setAttribute('tabindex','0');
-  el.addEventListener('keydown',function(e){
-    if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePolicy();
+});
+
+function tog(card) {
+  var d = card.querySelector('.step-detail');
+  var c = card.querySelector('.step-toggle');
+  if (!d) return;
+  var o = d.classList.toggle('show');
+  if (c) c.classList.toggle('open', o);
+}
+
+function togGate(el) {
+  var b = el.querySelector('.gate-body');
+  var c = el.querySelector('.gate-chev');
+  if (!b) return;
+  var o = b.classList.toggle('show');
+  if (c) c.classList.toggle('open', o);
+}
+
+document.querySelectorAll('.step,.gate').forEach(function(el) {
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
   });
 });
 </script>
