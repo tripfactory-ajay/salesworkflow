@@ -62,12 +62,43 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .li{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t2);font-family:'IBM Plex Mono',monospace}
 .ld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
+/* ── Leadership bar ── */
+.leadership-bar{background:var(--tf-navy);border-radius:var(--r-lg);overflow:hidden;margin-bottom:8px;box-shadow:0 2px 8px rgba(26,46,74,.12)}
+.leadership-top{display:flex;align-items:stretch;border-bottom:1px solid rgba(255,255,255,.12)}
+.leadership-exec{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.65rem .8rem;border-right:1px solid rgba(255,255,255,.1);text-align:center}
+.leadership-exec:last-child{border-right:none}
+.le-role{font-size:9px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--tf-yellow);font-family:'IBM Plex Mono',monospace;margin-bottom:2px}
+.le-name{font-size:13px;font-weight:700;color:#fff;line-height:1.2}
+.le-title{font-size:9.5px;color:rgba(255,255,255,.5);font-family:'IBM Plex Mono',monospace}
+.leadership-support{display:flex;align-items:center;padding:.4rem .75rem;gap:5px;flex-wrap:wrap}
+.ls-label{font-size:8.5px;font-weight:700;color:rgba(255,255,255,.35);font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding-right:8px;border-right:1px solid rgba(255,255,255,.1);margin-right:2px;white-space:nowrap;flex-shrink:0}
+.ls-chip{font-size:8.5px;font-weight:600;padding:2px 7px;border-radius:99px;font-family:'IBM Plex Mono',monospace;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.75);white-space:nowrap}
+.ls-chip.lc-legal{background:rgba(79,70,204,.3);border-color:rgba(79,70,204,.55)}
+.ls-chip.lc-hr{background:rgba(184,45,108,.25);border-color:rgba(184,45,108,.45)}
+.ls-chip.lc-pay{background:rgba(43,173,78,.2);border-color:rgba(43,173,78,.45)}
+.ls-chip.lc-tech{background:rgba(26,115,232,.25);border-color:rgba(26,115,232,.55)}
+.ls-chip.lc-mkt{background:rgba(197,104,47,.35);border-color:rgba(197,104,47,.65)}
+.ls-review{margin-left:auto;font-size:8px;color:rgba(255,255,255,.3);font-family:'IBM Plex Mono',monospace;font-style:italic;white-space:nowrap;flex-shrink:0}
+
+/* ── Page layout: sidebar + content ── */
+.page-layout{display:grid;grid-template-columns:152px 1fr;gap:10px;align-items:start}
+.sidebar{grid-column:1;grid-row:1 / 999;display:flex;flex-direction:column;gap:6px;position:sticky;top:10px;align-self:start}
+.sidebar-section{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.sidebar-hdr{background:var(--tf-navy);color:#fff;padding:.35rem .55rem;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'IBM Plex Mono',monospace}
+.sidebar-item{padding:.35rem .55rem;border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:1px}
+.sidebar-item:last-child{border-bottom:none}
+.si-icon{font-size:12px;line-height:1}
+.si-name{font-size:9.5px;font-weight:600;color:var(--t1);line-height:1.2}
+.si-desc{font-size:8px;color:var(--t3);font-family:'IBM Plex Mono',monospace;line-height:1.4}
+.sidebar-step-tag{font-size:7.5px;font-weight:700;padding:1px 5px;border-radius:99px;border:1px solid var(--bd2);color:var(--t3);font-family:'IBM Plex Mono',monospace;display:inline-block;margin-top:2px;background:#fff}
+.content-area{grid-column:2}
+
 /* ── Column headers ── */
 .col-headers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
-.col-hdr{background:var(--tf-navy);color:#fff;padding:.65rem .9rem;border-radius:var(--r);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
-.col-hdr-tag{font-size:9px;font-family:'IBM Plex Mono',monospace;opacity:.65;font-weight:400}
-.col-fit .col-hdr{background:#17426E}
-.col-b2b .col-hdr{background:#113257}
+.col-hdr{background:var(--tf-navy);color:#fff;padding:.6rem .85rem;border-radius:var(--r);font-size:12.5px;font-weight:700;display:flex;flex-direction:column;gap:2px}
+.col-hdr-name{font-size:12.5px;font-weight:700;color:#fff;line-height:1.2}
+.col-hdr-head{font-size:9px;color:var(--tf-yellow);font-family:'IBM Plex Mono',monospace;font-weight:500;opacity:.9}
+.col-hdr-tag{font-size:8.5px;font-family:'IBM Plex Mono',monospace;opacity:.5;font-weight:400;margin-top:1px}
 
 /* ── Main grid ── */
 .col-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-items:start}
@@ -215,7 +246,10 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 
 footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 
-@media(max-width:1050px){
+@media(max-width:1150px){
+  .page-layout{grid-template-columns:1fr}
+  .sidebar{position:static;flex-direction:row;flex-wrap:wrap;grid-row:auto}
+  .sidebar-section{flex:1;min-width:160px}
   .col-grid,.col-headers{grid-template-columns:1fr}
   .phase-hdr,.shared-row,.shared-gate-wrap{grid-column:1}
   .col-hdr{border-radius:var(--r)}
@@ -226,6 +260,8 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   .hdr-meta{display:none}
   .tf-logo{width:120px}
   .hdr-title{font-size:17px}
+  .leadership-top{flex-wrap:wrap}
+  .leadership-exec{min-width:50%}
 }
 @media print{
   body{background:#fff}
@@ -242,8 +278,8 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <div><img src="data:image/jpeg;base64,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" alt="TripFactory" class="tf-logo"></div>
   <div>
     <div class="hdr-eyebrow">Tour Booking Policy — Edition I, MMXXVI</div>
-    <h1 class="hdr-title">Booking Workflow — All Booking Types</h1>
-    <p class="hdr-sub">Group Tours · FIT Individual · B2B Agent &amp; Corporate · Departments, Roles &amp; Staff Levels · All Gates</p>
+    <h1 class="hdr-title">Booking Workflow — All Departments</h1>
+    <p class="hdr-sub">GIT · Groups/MICE · FIT Travel · Horizontal Support Functions · Leadership</p>
   </div>
   <div class="hdr-meta">
     <span class="hdr-badge">WORKING DRAFT · I</span>
@@ -255,10 +291,40 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
 <!-- ── STATS ────────────────────────────────────────────── -->
 <div class="stats">
   <div class="stat"><span class="stat-n">7</span><span class="stat-l">Gates (5 hard · 2 warn)</span></div>
-  <div class="stat"><span class="stat-n">3</span><span class="stat-l">Booking types</span></div>
+  <div class="stat"><span class="stat-n">3</span><span class="stat-l">Verticals: GIT · MICE · FIT</span></div>
   <div class="stat"><span class="stat-n">7</span><span class="stat-l">Departments</span></div>
   <div class="stat"><span class="stat-n">12</span><span class="stat-l">Mandatory fields</span></div>
   <div class="stat"><span class="stat-n">11</span><span class="stat-l">Booking Owner duties</span></div>
+</div>
+
+<!-- ── LEADERSHIP BAR ───────────────────────────────────── -->
+<div class="leadership-bar">
+  <div class="leadership-top">
+    <div class="leadership-exec">
+      <div class="le-role">Chief Executive Officer</div>
+      <div class="le-name">Raj Kumar</div>
+      <div class="le-title">CEO · TripFactory</div>
+    </div>
+    <div class="leadership-exec">
+      <div class="le-role">Chief Commercial Officer</div>
+      <div class="le-name">Ajay Kawa</div>
+      <div class="le-title">CCO · GIT · Groups/MICE · FIT Travel</div>
+    </div>
+    <div class="leadership-exec">
+      <div class="le-role">Chief People Officer</div>
+      <div class="le-name">Alia Taub</div>
+      <div class="le-title">CPO · Legal · HR · Payroll · Compliance</div>
+    </div>
+  </div>
+  <div class="leadership-support">
+    <span class="ls-label">Horizontal Governance — CPO</span>
+    <span class="ls-chip lc-legal">⚖ Legal &amp; Compliance</span>
+    <span class="ls-chip lc-hr">👤 HR &amp; Performance</span>
+    <span class="ls-chip lc-pay">₹ Payroll &amp; Expenses</span>
+    <span class="ls-chip lc-tech">⚙ Technology &amp; Systems</span>
+    <span class="ls-chip lc-mkt">📣 Marketing &amp; Product Launch</span>
+    <span class="ls-review">Review discipline: weekly CCO ops · monthly CPO governance · seasonal scorecard</span>
+  </div>
 </div>
 
 <!-- ── LEGEND ───────────────────────────────────────────── -->
@@ -279,11 +345,98 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   <div class="li" style="color:var(--t3);font-style:italic">↕ Click steps &amp; gates to expand</div>
 </div>
 
+<!-- ── PAGE LAYOUT: SIDEBAR + CONTENT ────────────────────── -->
+<div class="page-layout">
+
+<!-- ── SIDEBAR: HORIZONTAL SUPPORT LAYER ──────────────── -->
+<div class="sidebar">
+
+  <div class="sidebar-section">
+    <div class="sidebar-hdr">↔ Support Functions</div>
+    <div class="sidebar-item">
+      <span class="si-icon">🏨</span>
+      <span class="si-name">Product</span>
+      <span class="si-desc">Hotel options · package builds · pricing sign-off · supplier SLAs · voucher prep</span>
+      <span class="sidebar-step-tag">Steps 1–7</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">✈</span>
+      <span class="si-name">Flights</span>
+      <span class="si-desc">Availability · fare guidance · PNR holds · flight sealing · name verification · GDS</span>
+      <span class="sidebar-step-tag">Steps 1–7</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">₹</span>
+      <span class="si-name">Finance</span>
+      <span class="si-desc">Rate card · 6 payment gates · TCS · supplier disbursements · LERMS · zero-dues</span>
+      <span class="sidebar-step-tag">Steps 2–7</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">🛂</span>
+      <span class="si-name">Visa</span>
+      <span class="si-desc">Feasibility · embassy liaison · 8-stage tracking · rejection escalation</span>
+      <span class="sidebar-step-tag">Steps 2–5</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">⚙</span>
+      <span class="si-name">Operations</span>
+      <span class="si-desc">Coach contracting · guide allocation · supplier blocking · freeze · TM briefing</span>
+      <span class="sidebar-step-tag">Steps 4–7</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">🖥</span>
+      <span class="si-name">Technology</span>
+      <span class="si-desc">CRM · booking system · LERMS entries · payment gate recording · audit trail</span>
+      <span class="sidebar-step-tag">Steps 1–7</span>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-hdr">⚖ Governance</div>
+    <div class="sidebar-item">
+      <span class="si-icon">⚖</span>
+      <span class="si-name">Legal</span>
+      <span class="si-desc">Contract review · liability · T&amp;Cs · agent agreements · regulatory</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">👤</span>
+      <span class="si-name">HR</span>
+      <span class="si-desc">Hiring · appraisal · managed performance · disciplinary · scorecard review</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">💷</span>
+      <span class="si-name">Payroll</span>
+      <span class="si-desc">Monthly close · LERMS reconciliation · float settlements · expense sign-off</span>
+    </div>
+    <div class="sidebar-item">
+      <span class="si-icon">📣</span>
+      <span class="si-name">Marketing</span>
+      <span class="si-desc">Product launches · pricing approval · trade comms · brochures</span>
+    </div>
+  </div>
+
+</div><!-- /sidebar -->
+
+<!-- ── CONTENT AREA ────────────────────────────────────── -->
+<div class="content-area">
+
 <!-- ── COLUMN HEADERS ─────────────────────────────────── -->
 <div class="col-headers">
-  <div class="col-hdr col-group"><span>📅 Group Tour Booking</span><span class="col-hdr-tag">GTE · WOE · ISP · all group departures</span></div>
-  <div class="col-hdr col-fit" style="background:#17426E"><span>👤 FIT Individual Booking</span><span class="col-hdr-tag">Custom itinerary · solo · couple · small group</span></div>
-  <div class="col-hdr col-b2b" style="background:#113257"><span>🤝 B2B Agent / Corporate</span><span class="col-hdr-tag">Trade agent · corporate client · partner</span></div>
+  <div class="col-hdr" style="background:#1A2E4A">
+    <div class="col-hdr-name">🏨 GIT — Group Inclusive Tours</div>
+    <div class="col-hdr-head">Head: [GIT Director]</div>
+    <div class="col-hdr-tag">Fixed departure · coach · escorted · all pax</div>
+  </div>
+  <div class="col-hdr" style="background:#17426E">
+    <div class="col-hdr-name">🎯 Groups / MICE</div>
+    <div class="col-hdr-head">Head: [Groups &amp; MICE Director]</div>
+    <div class="col-hdr-tag">Incentives · conferences · events · bespoke groups</div>
+  </div>
+  <div class="col-hdr" style="background:#113257">
+    <div class="col-hdr-name">🧳 FIT Travel</div>
+    <div class="col-hdr-head">Head: [FIT &amp; Tailor-Made Director]</div>
+    <div class="col-hdr-tag">Custom itinerary · solo · couple · small group · B2B</div>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════════════
@@ -1359,6 +1512,9 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
   </div>
 </div>
 
+</div><!-- /content-area -->
+</div><!-- /page-layout -->
+
 <div class="rule-bar">
   <p>The rule from which everything else in this policy descends</p>
   <strong><span>Sell clean</span> · <span>Book clean</span> · <span>Collect on time</span> · <span>Freeze early</span> · <span>Handover complete</span> · <span>Operate without surprises</span></strong>
@@ -1367,7 +1523,7 @@ footer{margin-top:2rem;padding:.75rem 0;border-top:1px solid var(--bd);font-fami
 
 <footer>
   <span>TripFactory · Tour Booking Policy · Edition I, MMXXVI</span>
-  <span>Group · FIT · B2B · Ops &amp; Sales Control Desk</span>
+  <span>GIT · Groups/MICE · FIT Travel · CEO: Raj Kumar · CCO: Ajay Kawa · CPO: Alia Taub</span>
 </footer>
 
 </div>
